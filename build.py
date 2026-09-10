@@ -116,7 +116,7 @@ FOOT = '''  </main>
 '''
 
 SITE = 'https://theproperpeptide.com'
-OG_IMAGE = 'https://thepeptide.s3.us-east-1.amazonaws.com/Glow-Front-NoShadow 1 (1)-01K18YQWGPQRKRYGZXY7K4QFFC.png'
+OG_IMAGE = 'https://thepeptide.s3.us-east-1.amazonaws.com/CJC-Front-NoShadow-01K18XRHEPZPDRJ9VEFXTVSBAV.png'  # S3 file names are swapped at the source; this file shows the GLOW box
 OG = '''  <meta property="og:type" content="website">
   <meta property="og:site_name" content="Proper Peptides">
   <meta property="og:title" content="{title} | Proper Peptides">
@@ -302,6 +302,10 @@ about = '''
     <section>
       <div class="wrap">
         <div class="owner">
+          <figure>
+            <div class="photo"><img src="assets/cody.jpg" alt="Cody Zippe, founder of Proper Peptides"></div>
+            <figcaption>Cody Zippe</figcaption>
+          </figure>
           <div>
             <span class="eyebrow">Meet the owner</span>
             <h2>Cody Zippe</h2>

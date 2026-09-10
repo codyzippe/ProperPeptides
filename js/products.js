@@ -14,7 +14,7 @@ const PRODUCTS = [
     weight: "3.75 g",
     perStrip: ["BPC-157 300 mcg", "TB-500 250 mcg", "GHK-Cu 2 mg"],
     color: "cyan",
-    image: "https://thepeptide.s3.us-east-1.amazonaws.com/Glow-Front-NoShadow 1 (1)-01K18YQWGPQRKRYGZXY7K4QFFC.png",
+    image: "https://thepeptide.s3.us-east-1.amazonaws.com/CJC-Front-NoShadow-01K18XRHEPZPDRJ9VEFXTVSBAV.png",
     short: "A three peptide research blend of GHK-Cu, BPC-157, and TB-500, each studied for tissue remodeling, cell migration, and regeneration in experimental models.",
     sections: [
       { h: "GHK-Cu (Copper Tripeptide-1)", p: "A naturally occurring copper binding tripeptide (glycyl-L-histidyl-L-lysine). Research has examined its role in:", li: ["Tissue remodeling and wound healing", "Regulation of gene expression related to repair and regeneration", "Supporting angiogenesis (formation of new blood vessels)", "Anti-inflammatory and antioxidant properties in in vitro models", "Stimulating collagen and elastin synthesis in cell cultures"] },
@@ -69,7 +69,7 @@ const PRODUCTS = [
     weight: "2.6 g",
     perStrip: ["CJC-1295 250 mcg", "Ipamorelin 250 mcg"],
     color: "lemon",
-    image: "https://thepeptide.s3.us-east-1.amazonaws.com/CJC-Front-NoShadow-01K18XRHEPZPDRJ9VEFXTVSBAV.png",
+    image: "https://thepeptide.s3.us-east-1.amazonaws.com/Glow-Front-NoShadow 1 (1)-01K18YQWGPQRKRYGZXY7K4QFFC.png",
     short: "A research blend of two growth hormone secretagogues: CJC-1295, a synthetic GHRH analog, and Ipamorelin, a selective growth hormone releasing peptide.",
     sections: [
       { h: "CJC-1295", p: "A tetrasubstituted GHRH analog developed to extend the half-life and stability of native GHRH. In experimental models it has been observed to:", li: ["Prolong GH releasing activity via GHRH receptor binding", "Increase GH pulse amplitude without significantly affecting frequency", "Reduced degradation through albumin binding (DAC modified variant)", "Allow less frequent administration in research applications due to extended plasma half-life"] },
