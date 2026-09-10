@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Peptides | Proper Peptides</title>
+  <meta name="description" content="GLOW, Wolverine, NAD+, and CJC-1295/Ipamorelin research peptides from thePeptide, sold by Proper Peptides.">
+  <link rel="icon" href="assets/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <div class="gate" id="ageGate">
+    <div class="card">
+      <div class="ring">18+</div>
+      <h2>Age Verification Required</h2>
+      <p>You must be 18+ years old to view our peptide research products.</p>
+      <div class="actions">
+        <button class="yes" type="button">Yes, I'm 18+</button>
+        <button class="no" type="button">No, I'm under 18</button>
+      </div>
+    </div>
+  </div>
+
+  <header class="site">
+    <div class="wrap">
+      <a class="logo" href="index.html" aria-label="Proper Peptides home"><img src="assets/logo.svg" alt="Proper Peptides"></a>
+      <nav class="main" id="mainNav" aria-label="Primary">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="peptides.html" aria-current="page">Peptides</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="tools">
+        <a class="btn sm" href="peptides.html">Shop Peptides</a>
+        <a class="cart-btn" href="cart.html" aria-label="Cart">
+          <svg viewBox="0 0 24 24"><path d="M3 4h2l2.4 11.2a1 1 0 0 0 1 .8h9.6a1 1 0 0 0 1-.8L21 8H7"/><circle cx="9" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/></svg>
+          <span class="cart-count">0</span>
+        </a>
+        <button class="burger" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="mainNav"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="page-hero">
+      <div class="wrap center">
+        <span class="eyebrow">thePeptide &bull; Lab Tested &bull; Research Use Only</span>
+        <h1>Our Peptides</h1>
+        <p class="sub">Four research blends manufactured for thePeptide. Every product is lab tested for purity and shipped with tracking.</p>
+      </div>
+    </section>
+    <section style="padding-top:20px">
+      <div class="wrap">
+        <div class="products-grid" id="productGrid"></div>
+      </div>
+    </section>
+  </main>
+
+  <div class="disclaimer">
+    <div class="wrap">
+      <p>Our products are for research and/or investigative purposes and are not suitable for direct human consumption or consumers, nor are they intended for clinical or therapeutic use.</p>
+      <p>The statements and products listed on this website are not intended to diagnose, treat, cure, or prevent any disease. As such, they have not been evaluated or approved by the Federal Food and Drug Administration (the "FDA"). We are not a compounding pharmacy or outsourcing facility as defined under either Section 503A and 503B of the Federal Food, Drug, and Cosmetic Act.</p>
+    </div>
+  </div>
+
+  <footer class="site">
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <a class="logo" href="index.html"><img src="assets/logo.svg" alt="Proper Peptides"></a>
+          <p style="margin-top:16px">Authorized reseller of thePeptide research grade peptides. Premium research grade peptides for scientific and laboratory applications.</p>
+        </div>
+        <div>
+          <h4>Products</h4>
+          <ul>
+            <li><a href="peptides.html#glow">GLOW</a></li>
+            <li><a href="peptides.html#wolverine">Wolverine</a></li>
+            <li><a href="peptides.html#nad">NAD+</a></li>
+            <li><a href="peptides.html#cjc-1295-ipamorelin">CJC-1295 / Ipamorelin</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="cart.html">Cart</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Get In Touch</h4>
+          <ul>
+            <li><a href="mailto:properpeptide@gmail.com">properpeptide@gmail.com</a></li>
+            <li>Research Use Only</li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <p>&copy; 2026 Proper Peptides. All rights reserved. For research purposes only.</p>
+        <p>Products manufactured for thePeptide</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/products.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    const grid = document.getElementById('productGrid');
+    grid.innerHTML = PRODUCTS.map(p => `
+      <article class="pcard ${p.color}" id="${p.id}">
+        <div class="art"><img src="${p.image}" alt="${p.name} ${p.subtitle}"></div>
+        <div class="body">
+          <span class="tag">${p.count} &bull; Net Wt ${p.weight} &bull; SKU ${p.sku}</span>
+          <h3>${p.name}<small>${p.subtitle}</small></h3>
+          <p class="desc">${p.short}</p>
+          <ul class="specs">${p.perStrip.map(s => `<li>${s}</li>`).join('')}</ul>
+          <div class="buy">
+            <div class="price">${p.price ? money(p.price) : 'Contact for price'}<small>${p.price ? 'USD' : ''}</small></div>
+            <button class="btn sm" data-add="${p.id}">Add to Cart</button>
+          </div>
+          <a class="details-link" href="#" data-detail="${p.id}">View research details &darr;</a>
+        </div>
+      </article>
+      <div class="detail" id="detail-${p.id}">
+        <button class="btn sm outline close" data-close="${p.id}">Close</button>
+        <h3>${p.name} ${p.subtitle}</h3>
+        ${p.sections.map(s => `<h4>${s.h}</h4><p>${s.p}</p>${s.li.length ? '<ul>' + s.li.map(l => `<li>${l}</li>`).join('') + '</ul>' : ''}`).join('')}
+      </div>`).join('');
+
+    grid.addEventListener('click', e => {
+      const o = e.target.closest('[data-detail]'); const c = e.target.closest('[data-close]');
+      if (o) { e.preventDefault(); const d = document.getElementById('detail-' + o.dataset.detail); d.classList.toggle('open'); if (d.classList.contains('open')) d.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      if (c) document.getElementById('detail-' + c.dataset.close).classList.remove('open');
+    });
+    if (location.hash) { const t = document.querySelector(location.hash); if (t) setTimeout(() => t.scrollIntoView({ behavior: 'smooth', block: 'center' }), 200); }
+  </script>
+</body>
+</html>

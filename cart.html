@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cart | Proper Peptides</title>
+  <meta name="description" content="Your Proper Peptides cart.">
+  <link rel="icon" href="assets/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <div class="gate" id="ageGate">
+    <div class="card">
+      <div class="ring">18+</div>
+      <h2>Age Verification Required</h2>
+      <p>You must be 18+ years old to view our peptide research products.</p>
+      <div class="actions">
+        <button class="yes" type="button">Yes, I'm 18+</button>
+        <button class="no" type="button">No, I'm under 18</button>
+      </div>
+    </div>
+  </div>
+
+  <header class="site">
+    <div class="wrap">
+      <a class="logo" href="index.html" aria-label="Proper Peptides home"><img src="assets/logo.svg" alt="Proper Peptides"></a>
+      <nav class="main" id="mainNav" aria-label="Primary">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="peptides.html">Peptides</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="tools">
+        <a class="btn sm" href="peptides.html">Shop Peptides</a>
+        <a class="cart-btn" href="cart.html" aria-label="Cart">
+          <svg viewBox="0 0 24 24"><path d="M3 4h2l2.4 11.2a1 1 0 0 0 1 .8h9.6a1 1 0 0 0 1-.8L21 8H7"/><circle cx="9" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/></svg>
+          <span class="cart-count">0</span>
+        </a>
+        <button class="burger" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="mainNav"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="page-hero">
+      <div class="wrap"><h1>Your Cart</h1></div>
+    </section>
+    <section style="padding-top:10px">
+      <div class="wrap">
+        <div class="cart-layout">
+          <div class="cart-list" id="cartList"></div>
+          <aside class="summary" id="summary">
+            <h3>Order Summary</h3>
+            <div class="line"><span>Subtotal</span><span id="sumSub">$0.00</span></div>
+            <div class="line"><span>Shipping</span><span>Calculated at checkout</span></div>
+            <div class="line total"><span>Total</span><span id="sumTotal">$0.00</span></div>
+            <button class="btn" id="checkoutBtn">Checkout <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+            <p class="note">Secure payment via Stripe. Research use only.</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="disclaimer">
+    <div class="wrap">
+      <p>Our products are for research and/or investigative purposes and are not suitable for direct human consumption or consumers, nor are they intended for clinical or therapeutic use.</p>
+      <p>The statements and products listed on this website are not intended to diagnose, treat, cure, or prevent any disease. As such, they have not been evaluated or approved by the Federal Food and Drug Administration (the "FDA"). We are not a compounding pharmacy or outsourcing facility as defined under either Section 503A and 503B of the Federal Food, Drug, and Cosmetic Act.</p>
+    </div>
+  </div>
+
+  <footer class="site">
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <a class="logo" href="index.html"><img src="assets/logo.svg" alt="Proper Peptides"></a>
+          <p style="margin-top:16px">Authorized reseller of thePeptide research grade peptides. Premium research grade peptides for scientific and laboratory applications.</p>
+        </div>
+        <div>
+          <h4>Products</h4>
+          <ul>
+            <li><a href="peptides.html#glow">GLOW</a></li>
+            <li><a href="peptides.html#wolverine">Wolverine</a></li>
+            <li><a href="peptides.html#nad">NAD+</a></li>
+            <li><a href="peptides.html#cjc-1295-ipamorelin">CJC-1295 / Ipamorelin</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="cart.html">Cart</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Get In Touch</h4>
+          <ul>
+            <li><a href="mailto:properpeptide@gmail.com">properpeptide@gmail.com</a></li>
+            <li>Research Use Only</li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <p>&copy; 2026 Proper Peptides. All rights reserved. For research purposes only.</p>
+        <p>Products manufactured for thePeptide</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/products.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    function renderCart() {
+      const list = document.getElementById('cartList');
+      const items = Cart.items();
+      if (!items.length) {
+        list.innerHTML = '<div class="empty"><h3>Your cart is empty</h3><p style="margin:10px 0 20px">Browse the four thePeptide research blends.</p><a class="btn" href="peptides.html">Shop Peptides</a></div>';
+        document.getElementById('summary').style.display = 'none';
+        return;
+      }
+      document.getElementById('summary').style.display = '';
+      list.innerHTML = items.map(i => `
+        <div class="cart-item ${i.color}">
+          <div class="thumb"><img src="${i.image}" alt="${i.name}"></div>
+          <div>
+            <h3>${i.name} <span style="font-weight:500;color:var(--text-dim);font-size:.85rem">${i.subtitle}</span></h3>
+            <div class="meta">${i.count} &bull; ${money(i.price)} each</div>
+            <div class="qty"><button data-q="${i.id}" data-d="-1">&minus;</button><span>${i.qty}</span><button data-q="${i.id}" data-d="1">+</button></div>
+            <button class="remove" data-rm="${i.id}">Remove</button>
+          </div>
+          <div class="price">${money(i.price * i.qty)}</div>
+        </div>`).join('');
+      const sub = Cart.subtotal();
+      document.getElementById('sumSub').textContent = money(sub);
+      document.getElementById('sumTotal').textContent = money(sub);
+    }
+    document.addEventListener('click', e => {
+      const q = e.target.closest('[data-q]'); const r = e.target.closest('[data-rm]');
+      if (q) { const c = Cart.get(); Cart.set(q.dataset.q, (c[q.dataset.q] || 0) + Number(q.dataset.d)); renderCart(); }
+      if (r) { Cart.remove(r.dataset.rm); renderCart(); }
+    });
+    document.getElementById('checkoutBtn').addEventListener('click', async () => {
+      const btn = document.getElementById('checkoutBtn');
+      btn.disabled = true; btn.textContent = 'Redirecting to secure checkout...';
+      try {
+        const res = await fetch('/api/checkout', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ items: Cart.items().map(i => ({ id: i.id, qty: i.qty })) })
+        });
+        const data = await res.json();
+        if (data.url) window.location.href = data.url;
+        else throw new Error(data.error || 'Checkout failed');
+      } catch (err) {
+        toast(err.message);
+        btn.disabled = false; btn.textContent = 'Checkout';
+      }
+    });
+    renderCart();
+  </script>
+</body>
+</html>
