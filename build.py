@@ -7,7 +7,8 @@ HEAD = '''<!DOCTYPE html>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{title} | Proper Peptides</title>
   <meta name="description" content="{desc}">
-  <link rel="icon" href="assets/logo.svg">
+  <link rel="canonical" href="{url}">
+{og}  <link rel="icon" href="assets/logo.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -114,9 +115,26 @@ FOOT = '''  </main>
 </html>
 '''
 
-def page(name, title, desc, body, current, extra='', ticker=False):
+SITE = 'https://theproperpeptide.com'
+OG_IMAGE = 'https://thepeptide.s3.us-east-1.amazonaws.com/Glow-Front-NoShadow 1 (1)-01K18YQWGPQRKRYGZXY7K4QFFC.png'
+OG = '''  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Proper Peptides">
+  <meta property="og:title" content="{title} | Proper Peptides">
+  <meta property="og:description" content="{desc}">
+  <meta property="og:image" content="{image}">
+  <meta property="og:url" content="{url}">
+  <meta name="twitter:card" content="summary_large_image">
+'''
+
+# vercel.json uses cleanUrls, so the public URL for foo.html is /foo (and index.html is /)
+def page_url(name):
+    return SITE + '/' + ('' if name == 'index.html' else name[:-5])
+
+def page(name, title, desc, body, current, extra='', ticker=False, og=False):
     cur = {k: (' aria-current="page"' if k == current else '') for k in ['home','pep','about','contact']}
-    html = HEAD.format(title=title, desc=desc, ticker=(TICKER if ticker else ''), c_home=cur['home'], c_pep=cur['pep'], c_about=cur['about'], c_contact=cur['contact']) + body + FOOT.format(extra=extra)
+    url = page_url(name)
+    og_tags = OG.format(title=title, desc=desc, image=OG_IMAGE.replace(' ', '%20'), url=url) if og else ''
+    html = HEAD.format(title=title, desc=desc, url=url, og=og_tags, ticker=(TICKER if ticker else ''), c_home=cur['home'], c_pep=cur['pep'], c_about=cur['about'], c_contact=cur['contact']) + body + FOOT.format(extra=extra)
     open(name, 'w').write(html)
 
 # ---------------- HOME ----------------
@@ -182,7 +200,7 @@ home_extra = '''  <script>
     if (window.innerWidth < 1024) document.querySelector('.cats').style.gridTemplateColumns = 'repeat(2, 1fr)';
     if (window.innerWidth < 640) document.querySelector('.cats').style.gridTemplateColumns = '1fr';
   </script>'''
-page('index.html', 'Premium Research Peptides', 'Proper Peptides: authorized reseller of thePeptide lab tested research peptides. GLOW, Wolverine, NAD+, CJC-1295/Ipamorelin.', home, 'home', home_extra, ticker=True)
+page('index.html', 'Premium Research Peptides', 'Proper Peptides: authorized reseller of thePeptide lab tested research peptides. GLOW, Wolverine, NAD+, CJC-1295/Ipamorelin.', home, 'home', home_extra, ticker=True, og=True)
 
 # ---------------- PEPTIDES ----------------
 pep = '''
@@ -358,7 +376,7 @@ contact = '''
       </div>
     </section>
 '''
-page('contact.html', 'Contact', 'Contact Proper Peptides.', contact, 'contact')
+page('contact.html', 'Contact', 'Contact Proper Peptides by email for product questions, order status, and wholesale inquiries. Research use only.', contact, 'contact')
 
 # ---------------- CART / CHECKOUT ----------------
 cart = '''
@@ -646,4 +664,9 @@ cart_extra = r'''  <script>
     render();
   </script>'''
 page('cart.html', 'Cart', 'Your Proper Peptides cart and checkout. Pay with Venmo or Cash App, free FedEx shipping on 6 or more boxes.', cart, '', cart_extra)
+# ---------------- SEO files ----------------
+PAGES = ['index.html', 'peptides.html', 'about.html', 'contact.html', 'cart.html']
+open('robots.txt', 'w').write('User-agent: *\nAllow: /\n\nSitemap: ' + SITE + '/sitemap.xml\n')
+open('sitemap.xml', 'w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+    + ''.join('  <url><loc>' + page_url(n) + '</loc></url>\n' for n in PAGES) + '</urlset>\n')
 print("built")
