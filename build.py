@@ -292,7 +292,7 @@ about = '''
             <span class="eyebrow">Meet the owner</span>
             <h2>Cody Zippe</h2>
             <p class="role">Founder, Proper Peptides &bull; Authorized thePeptide Sales Representative</p>
-            <p>Every order is handled personally by Cody, from confirming your payment to packing the box, and ships with FedEx tracking so you always know where your research materials are.</p>
+            <p>Every order is handled personally by thePeptide team, from confirming your payment to packing the box, and ships with FedEx tracking so you always know where your research materials are.</p>
             <div class="owner-cards">
               <div class="card">
                 <h4>Business email</h4>
