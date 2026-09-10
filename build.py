@@ -8,7 +8,10 @@ HEAD = '''<!DOCTYPE html>
   <title>{title} | Proper Peptides</title>
   <meta name="description" content="{desc}">
   <link rel="canonical" href="{url}">
-{og}{head_extra}  <link rel="icon" href="assets/logo.svg">
+{og}{head_extra}  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
