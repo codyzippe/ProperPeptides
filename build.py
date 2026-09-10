@@ -5,7 +5,7 @@ HEAD = '''<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{title} | Proper Peptides</title>
+  <title>{full_title}</title>
   <meta name="description" content="{desc}">
   <link rel="canonical" href="{url}">
 {og}{head_extra}  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
@@ -122,7 +122,7 @@ SITE = 'https://theproperpeptide.com'
 OG_IMAGE = 'https://thepeptide.s3.us-east-1.amazonaws.com/CJC-Front-NoShadow-01K18XRHEPZPDRJ9VEFXTVSBAV.png'  # S3 file names are swapped at the source; this file shows the GLOW box
 OG = '''  <meta property="og:type" content="website">
   <meta property="og:site_name" content="Proper Peptides">
-  <meta property="og:title" content="{title} | Proper Peptides">
+  <meta property="og:title" content="{full_title}">
   <meta property="og:description" content="{desc}">
   <meta property="og:image" content="{image}">
   <meta property="og:url" content="{url}">
@@ -136,8 +136,9 @@ def page_url(name):
 def page(name, title, desc, body, current, extra='', ticker=False, og=False, head_extra=''):
     cur = {k: (' aria-current="page"' if k == current else '') for k in ['home','pep','about','contact']}
     url = page_url(name)
-    og_tags = OG.format(title=title, desc=desc, image=OG_IMAGE.replace(' ', '%20'), url=url) if og else ''
-    html = HEAD.format(title=title, desc=desc, url=url, og=og_tags, head_extra=head_extra, ticker=(TICKER if ticker else ''), c_home=cur['home'], c_pep=cur['pep'], c_about=cur['about'], c_contact=cur['contact']) + body + FOOT.format(extra=extra)
+    full_title = title if 'Proper Peptides' in title else title + ' | Proper Peptides'
+    og_tags = OG.format(full_title=full_title, desc=desc, image=OG_IMAGE.replace(' ', '%20'), url=url) if og else ''
+    html = HEAD.format(full_title=full_title, desc=desc, url=url, og=og_tags, head_extra=head_extra, ticker=(TICKER if ticker else ''), c_home=cur['home'], c_pep=cur['pep'], c_about=cur['about'], c_contact=cur['contact']) + body + FOOT.format(extra=extra)
     open(name, 'w').write(html)
 
 # ---------------- HOME ----------------
@@ -203,7 +204,7 @@ home_extra = '''  <script>
     if (window.innerWidth < 1024) document.querySelector('.cats').style.gridTemplateColumns = 'repeat(2, 1fr)';
     if (window.innerWidth < 640) document.querySelector('.cats').style.gridTemplateColumns = '1fr';
   </script>'''
-page('index.html', 'Premium Research Peptides', 'Proper Peptides: authorized reseller of thePeptide lab tested research peptides. GLOW, Wolverine, NAD+, CJC-1295/Ipamorelin.', home, 'home', home_extra, ticker=True, og=True,
+page('index.html', 'Proper Peptides | Research Peptide Strips - GLOW, NAD+, CJC-1295 & More', 'Shop lab-tested research peptide strips from Proper Peptides. GLOW, Wolverine, NAD+, and CJC-1295/Ipamorelin blends, 99%+ purity, fast FedEx shipping. Research use only.', home, 'home', home_extra, ticker=True, og=True,
      head_extra='  <meta name="google-site-verification" content="3orrgi-qReCQwUGjqSRBCoDyfLiaDjIUaHbaigQT_Gg" />\n')
 
 # ---------------- PEPTIDES ----------------
@@ -251,7 +252,7 @@ pep_extra = '''  <script>
     });
     if (location.hash) { const t = document.querySelector(location.hash); if (t) setTimeout(() => t.scrollIntoView({ behavior: 'smooth', block: 'center' }), 200); }
   </script>'''
-page('peptides.html', 'Peptides', 'GLOW, Wolverine, NAD+, and CJC-1295/Ipamorelin research peptides from thePeptide, sold by Proper Peptides.', pep, 'pep', pep_extra)
+page('peptides.html', 'Buy Research Peptides Online | Peptide Strips - Proper Peptides', 'Browse our full peptide blend lineup: GLOW (GHK-Cu/BPC-157/TB-500), Wolverine, NAD+, and CJC-1295/Ipamorelin. Lab-tested peptide strips, $120 each, ships fast.', pep, 'pep', pep_extra)
 
 # ---------------- ABOUT ----------------
 about = '''
