@@ -302,10 +302,6 @@ about = '''
     <section>
       <div class="wrap">
         <div class="owner">
-          <figure>
-            <div class="photo"><img src="assets/cody.jpg" alt="Cody Zippe, founder of Proper Peptides"></div>
-            <figcaption>Cody Zippe</figcaption>
-          </figure>
           <div>
             <span class="eyebrow">Meet the owner</span>
             <h2>Cody Zippe</h2>
