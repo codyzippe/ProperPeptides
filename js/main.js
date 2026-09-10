@@ -3,6 +3,43 @@
    Age gate, mobile nav, cart (localStorage), toast, helpers
    ========================================================= */
 
+// ---------- Store settings (edit these) ----------
+const STORE = {
+  venmoUser: "theproperpeptides",                 // https://www.venmo.com/u/theproperpeptides
+  cashTag: "theproperpeptides",                   // https://cash.app/$theproperpeptides
+  orderEmail: "codyzippe1@gmail.com",             // where orders are sent
+  formspree: "https://formspree.io/f/YOUR_FORM_ID", // optional: paste a real Formspree endpoint to receive orders as JSON
+  freeShipQty: 6,                                 // boxes needed for free FedEx shipping
+  shipping: [
+    { id: "ground",    name: "FedEx Ground",    price: 15, eta: "3 to 5 business days" },
+    { id: "2day",      name: "FedEx 2Day",      price: 25, eta: "2 business days" },
+    { id: "overnight", name: "FedEx Overnight", price: 50, eta: "Next business day" }
+  ]
+};
+
+// Shipping cost for a method id and box count (free at STORE.freeShipQty or more)
+function shippingFor(methodId, qty) {
+  const m = STORE.shipping.find(x => x.id === methodId);
+  if (!m) return 0;
+  return qty >= STORE.freeShipQty ? 0 : m.price;
+}
+
+// Order id like PP7K2Q9X (PP + 6 uppercase chars)
+function orderNumber() {
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let id = 'PP';
+  for (let i = 0; i < 6; i++) id += chars[Math.floor(Math.random() * chars.length)];
+  return id;
+}
+
+// Payment deep links with the amount pre filled
+function venmoLink(amount, note) {
+  return 'https://venmo.com/' + STORE.venmoUser + '?txn=pay&amount=' + Number(amount).toFixed(2) + '&note=' + encodeURIComponent(note);
+}
+function cashLink(amount) {
+  return 'https://cash.app/$' + STORE.cashTag + '/' + Number(amount).toFixed(2);
+}
+
 // ---------- Age gate ----------
 (function ageGate() {
   const gate = document.getElementById('ageGate');

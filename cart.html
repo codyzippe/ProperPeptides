@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cart | Proper Peptides</title>
-  <meta name="description" content="Your Proper Peptides cart.">
+  <meta name="description" content="Your Proper Peptides cart and checkout. Pay with Venmo or Cash App, free FedEx shipping on 6 or more boxes.">
   <link rel="icon" href="assets/logo.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -50,19 +50,72 @@
   <main>
 
     <section class="page-hero">
-      <div class="wrap"><h1>Your Cart</h1></div>
+      <div class="wrap"><h1 id="pageTitle">Your Cart</h1></div>
     </section>
     <section style="padding-top:10px">
       <div class="wrap">
-        <div class="cart-layout">
-          <div class="cart-list" id="cartList"></div>
+        <ol class="steps" id="steps" aria-label="Checkout progress">
+          <li class="active"><span class="n">1</span><span class="l">Cart</span></li>
+          <li><span class="n">2</span><span class="l">Shipping</span></li>
+          <li><span class="n">3</span><span class="l">Payment</span></li>
+          <li><span class="n">4</span><span class="l">Done</span></li>
+        </ol>
+
+        <div class="empty" id="emptyCart" hidden>
+          <h3>Your cart is empty</h3>
+          <p style="margin:10px 0 20px">Browse the four thePeptide research blends. $120 per box, free FedEx shipping on 6 or more.</p>
+          <a class="btn" href="peptides.html">Shop Peptides</a>
+        </div>
+
+        <div class="cart-layout" id="checkout">
+          <div class="step-panels">
+
+            <div class="step-panel" id="step1">
+              <div class="ship-banner" id="shipBanner"></div>
+              <div class="cart-list" id="cartList"></div>
+            </div>
+
+            <div class="step-panel" id="step2" hidden>
+              <form id="shipForm" class="panel">
+                <h3>Shipping address</h3>
+                <div class="row2">
+                  <div class="field"><label for="fName">Full name</label><input id="fName" name="name" autocomplete="name" required></div>
+                  <div class="field"><label for="fEmail">Email</label><input id="fEmail" name="email" type="email" autocomplete="email" required></div>
+                </div>
+                <div class="field"><label for="fPhone">Phone</label><input id="fPhone" name="phone" type="tel" autocomplete="tel" required></div>
+                <div class="field"><label for="fStreet">Street address</label><input id="fStreet" name="street" autocomplete="street-address" required></div>
+                <div class="row3">
+                  <div class="field"><label for="fCity">City</label><input id="fCity" name="city" autocomplete="address-level2" required></div>
+                  <div class="field"><label for="fState">State</label><input id="fState" name="state" autocomplete="address-level1" maxlength="2" pattern="[A-Za-z]{2}" title="Two letter state code" placeholder="CA" required></div>
+                  <div class="field"><label for="fZip">ZIP</label><input id="fZip" name="zip" inputmode="numeric" autocomplete="postal-code" pattern="\d{5}(-\d{4})?" title="5 digit ZIP code" required></div>
+                </div>
+
+                <h3 class="mt">Shipping method</h3>
+                <div class="opts" id="shipOpts"></div>
+
+                <h3 class="mt">Payment method</h3>
+                <div class="opts" id="payOpts">
+                  <label class="opt"><input type="radio" name="pay" value="venmo" required><span class="ico venmo">V</span><span class="body"><strong>Venmo</strong><small>@theproperpeptides</small></span></label>
+                  <label class="opt"><input type="radio" name="pay" value="cashapp" required><span class="ico cashapp">$</span><span class="body"><strong>Cash App</strong><small>$theproperpeptides</small></span></label>
+                </div>
+
+                <label class="agree"><input type="checkbox" name="agree" required><span>I confirm I am 18+ and these products are for research use only.</span></label>
+                <button class="btn form-continue" type="submit">Continue to Payment <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+              </form>
+            </div>
+
+            <div class="step-panel" id="step3" hidden></div>
+            <div class="step-panel" id="step4" hidden></div>
+          </div>
+
           <aside class="summary" id="summary">
             <h3>Order Summary</h3>
-            <div class="line"><span>Subtotal</span><span id="sumSub">$0.00</span></div>
-            <div class="line"><span>Shipping</span><span>Calculated at checkout</span></div>
+            <ul class="sum-items" id="sumItems"></ul>
+            <div class="line"><span id="sumSubLabel">Subtotal</span><span id="sumSub">$0.00</span></div>
+            <div class="line"><span>Shipping</span><span id="sumShip">Select at checkout</span></div>
             <div class="line total"><span>Total</span><span id="sumTotal">$0.00</span></div>
-            <button class="btn" id="checkoutBtn">Checkout <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-            <p class="note">Secure payment via Stripe. Research use only.</p>
+            <div class="actions" id="sumActions"></div>
+            <p class="note">Free FedEx shipping on 6 or more boxes. Pay with Venmo or Cash App.</p>
           </aside>
         </div>
       </div>
@@ -103,14 +156,14 @@
         <div>
           <h4>Get In Touch</h4>
           <ul>
-            <li><a href="mailto:properpeptide@gmail.com">properpeptide@gmail.com</a></li>
+            <li><a href="mailto:codyzippe1@gmail.com">codyzippe1@gmail.com</a></li>
             <li>Research Use Only</li>
           </ul>
         </div>
       </div>
       <div class="foot-bottom">
         <p>&copy; 2026 Proper Peptides. All rights reserved. For research purposes only.</p>
-        <p>Products manufactured for thePeptide</p>
+        <p>Payments by Venmo and Cash App &bull; FedEx shipping</p>
       </div>
     </div>
   </footer>
@@ -118,52 +171,198 @@
   <script src="js/products.js"></script>
   <script src="js/main.js"></script>
   <script>
-    function renderCart() {
-      const list = document.getElementById('cartList');
+    // ---------- Checkout state (survives a reload within the tab) ----------
+    const FRESH = () => ({ step: 1, shipId: STORE.shipping[0].id, pay: 'venmo', info: {}, orderNo: null, order: null, sent: false });
+    const CK = {
+      key: 'pp_checkout',
+      state: FRESH(),
+      load() { try { Object.assign(this.state, JSON.parse(sessionStorage.getItem(this.key)) || {}); } catch {} },
+      save() { try { sessionStorage.setItem(this.key, JSON.stringify(this.state)); } catch {} },
+      reset() { try { sessionStorage.removeItem(this.key); } catch {} Object.assign(this.state, FRESH()); }
+    };
+    const S = CK.state;
+    const $ = id => document.getElementById(id);
+    const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const shipMethod = id => STORE.shipping.find(m => m.id === id) || STORE.shipping[0];
+    const payName = p => p === 'cashapp' ? 'Cash App' : 'Venmo';
+    const payHandle = p => p === 'cashapp' ? '$' + STORE.cashTag : '@' + STORE.venmoUser;
+
+    // Live totals from the cart (steps 1 to 3). Step 4 uses the saved order snapshot.
+    function totals() {
+      if (S.step === 4 && S.order) return S.order;
       const items = Cart.items();
-      if (!items.length) {
-        list.innerHTML = '<div class="empty"><h3>Your cart is empty</h3><p style="margin:10px 0 20px">Browse the four thePeptide research blends.</p><a class="btn" href="peptides.html">Shop Peptides</a></div>';
-        document.getElementById('summary').style.display = 'none';
+      const boxes = items.reduce((n, i) => n + i.qty, 0);
+      const subtotal = items.reduce((n, i) => n + i.price * i.qty, 0);
+      const shipping = S.step >= 2 ? shippingFor(S.shipId, boxes) : null;
+      return { items, boxes, subtotal, shipping, total: subtotal + (shipping || 0) };
+    }
+
+    // Snapshot of everything the owner needs, taken when the customer reaches Payment
+    function buildOrder() {
+      const t = totals(); const m = shipMethod(S.shipId);
+      return {
+        orderNumber: S.orderNo,
+        items: t.items.map(i => ({ id: i.id, name: i.name + ' ' + i.subtitle, sku: i.sku, qty: i.qty, price: i.price, lineTotal: i.price * i.qty })),
+        boxes: t.boxes, subtotal: t.subtotal,
+        shippingMethod: m.name + ' (' + m.eta + ')', shipping: t.shipping, total: t.total,
+        paymentMethod: payName(S.pay) + ' ' + payHandle(S.pay),
+        name: S.info.name, email: S.info.email, phone: S.info.phone,
+        address: S.info.street + ', ' + S.info.city + ', ' + (S.info.state || '').toUpperCase() + ' ' + S.info.zip,
+        placedAt: new Date().toISOString()
+      };
+    }
+
+    function goto(step) { S.step = step; CK.save(); render(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+    // ---------- Render ----------
+    function render() {
+      const t = totals();
+      if (S.step < 4 && !t.items.length) {
+        $('emptyCart').hidden = false; $('checkout').hidden = true;
+        $('pageTitle').textContent = 'Your Cart';
+        $('steps').querySelectorAll('li').forEach((li, i) => li.className = i === 0 ? 'active' : '');
         return;
       }
-      document.getElementById('summary').style.display = '';
-      list.innerHTML = items.map(i => `
+      $('emptyCart').hidden = true; $('checkout').hidden = false;
+      $('pageTitle').textContent = ['Your Cart', 'Shipping', 'Payment', 'Order Received'][S.step - 1];
+      $('steps').querySelectorAll('li').forEach((li, i) => li.className = i + 1 < S.step ? 'done' : i + 1 === S.step ? 'active' : '');
+      [1, 2, 3, 4].forEach(n => $('step' + n).hidden = n !== S.step);
+      ({ 1: renderCart, 2: renderShipping, 3: renderPayment, 4: renderDone })[S.step]();
+      renderSummary(totals());
+    }
+
+    function renderCart() {
+      const t = totals(); const need = STORE.freeShipQty - t.boxes;
+      const unlocked = need <= 0;
+      $('shipBanner').className = 'ship-banner' + (unlocked ? ' unlocked' : '');
+      $('shipBanner').innerHTML = `
+        <div class="txt"><span>${unlocked ? "You've unlocked free FedEx shipping" : `Add ${need} more box${need === 1 ? '' : 'es'} for free FedEx shipping`}</span><small>${t.boxes} of ${STORE.freeShipQty} boxes</small></div>
+        <div class="bar"><span style="width:${Math.min(100, t.boxes / STORE.freeShipQty * 100)}%"></span></div>`;
+      $('cartList').innerHTML = t.items.map(i => `
         <div class="cart-item ${i.color}">
           <div class="thumb"><img src="${i.image}" alt="${i.name}"></div>
           <div>
             <h3>${i.name} <span style="font-weight:500;color:var(--text-dim);font-size:.85rem">${i.subtitle}</span></h3>
-            <div class="meta">${i.count} &bull; ${money(i.price)} each</div>
-            <div class="qty"><button data-q="${i.id}" data-d="-1">&minus;</button><span>${i.qty}</span><button data-q="${i.id}" data-d="1">+</button></div>
-            <button class="remove" data-rm="${i.id}">Remove</button>
+            <div class="meta">${i.count} &bull; ${money(i.price)} per box</div>
+            <div class="qty"><button type="button" data-q="${i.id}" data-d="-1" aria-label="Decrease quantity">&minus;</button><span>${i.qty}</span><button type="button" data-q="${i.id}" data-d="1" aria-label="Increase quantity">+</button></div>
+            <button type="button" class="remove" data-rm="${i.id}">Remove</button>
           </div>
           <div class="price">${money(i.price * i.qty)}</div>
         </div>`).join('');
-      const sub = Cart.subtotal();
-      document.getElementById('sumSub').textContent = money(sub);
-      document.getElementById('sumTotal').textContent = money(sub);
     }
+
+    function renderShipping() {
+      const t = totals(); const free = t.boxes >= STORE.freeShipQty;
+      const f = $('shipForm');
+      ['name', 'email', 'phone', 'street', 'city', 'state', 'zip'].forEach(k => { if (S.info[k] != null) f.elements[k].value = S.info[k]; });
+      $('shipOpts').innerHTML = STORE.shipping.map(m => `
+        <label class="opt ${m.id === S.shipId ? 'selected' : ''}">
+          <input type="radio" name="ship" value="${m.id}" ${m.id === S.shipId ? 'checked' : ''} required>
+          <span class="body"><strong>${m.name}</strong><small>${m.eta}</small></span>
+          <span class="cost ${free ? 'free' : ''}">${free ? 'FREE' : money(m.price)}</span>
+        </label>`).join('');
+      f.querySelectorAll('input[name=pay]').forEach(r => { r.checked = r.value === S.pay; r.closest('.opt').classList.toggle('selected', r.checked); });
+    }
+
+    function renderPayment() {
+      if (!S.orderNo) S.orderNo = orderNumber();
+      S.order = buildOrder(); CK.save();
+      const o = S.order; const cash = S.pay === 'cashapp';
+      const link = cash ? cashLink(o.total) : venmoLink(o.total, 'Proper Peptides order ' + o.orderNumber);
+      $('step3').innerHTML = `
+        <div class="panel pay-panel">
+          <span class="tag">Order ${o.orderNumber}</span>
+          <h3>Send ${money(o.total)} via ${payName(S.pay)}</h3>
+          <p>Tap the button to open ${payName(S.pay)} with the amount pre filled${cash ? '' : ' and the order number in the note'}. Please include your order number <strong>${o.orderNumber}</strong> in the payment note so we can match it to your shipment.</p>
+          <a class="pay-btn ${cash ? 'cashapp' : 'venmo'}" href="${link}" target="_blank" rel="noopener">Pay ${money(o.total)} with ${payName(S.pay)}</a>
+          <div class="pay-manual">
+            <div><small>Send to</small><strong>${payHandle(S.pay)}</strong></div>
+            <div><small>Amount</small><strong>${money(o.total)}</strong></div>
+            <div><small>Note</small><strong>${o.orderNumber}</strong></div>
+          </div>
+          <p class="muted">On a desktop? Open ${payName(S.pay)} on your phone and send ${money(o.total)} to ${payHandle(S.pay)} with the note ${o.orderNumber}.</p>
+          <button type="button" class="btn" data-go="4">I've sent the payment</button>
+        </div>`;
+    }
+
+    function renderDone() {
+      const o = S.order;
+      if (!S.sent) { S.sent = true; CK.save(); sendOrder(o); Cart.clear(); }
+      $('step4').innerHTML = `
+        <div class="panel done-panel">
+          <div class="check-mark"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg></div>
+          <span class="tag">Order ${o.orderNumber}</span>
+          <h3>Thanks, ${esc((o.name || '').split(' ')[0])}. Your order is in.</h3>
+          <p>We'll confirm your ${payName(S.pay)} payment and email a FedEx tracking number to <strong>${esc(o.email)}</strong> as soon as your order ships.</p>
+          <p class="muted">Keep your order number handy. Questions? <a href="mailto:${STORE.orderEmail}">${STORE.orderEmail}</a></p>
+          <div style="margin-top:24px"><a class="btn" href="peptides.html">Continue Shopping</a></div>
+        </div>`;
+    }
+
+    function renderSummary(t) {
+      $('sumItems').innerHTML = t.items.map(i => `<li><span>${i.name} &times; ${i.qty}</span><span>${money(i.price * i.qty)}</span></li>`).join('');
+      $('sumSubLabel').textContent = `Subtotal (${t.boxes} box${t.boxes === 1 ? '' : 'es'})`;
+      $('sumSub').textContent = money(t.subtotal);
+      $('sumShip').textContent = t.shipping == null ? 'Select at checkout' : t.shipping === 0 ? 'FREE' : money(t.shipping);
+      $('sumShip').classList.toggle('free', t.shipping === 0);
+      $('sumTotal').textContent = money(t.total);
+      const next = '<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+      $('sumActions').innerHTML = {
+        1: `<button type="button" class="btn" data-go="2">Continue to Shipping ${next}</button>`,
+        2: `<button type="button" class="btn" id="sumSubmit">Continue to Payment ${next}</button><button type="button" class="btn outline" data-go="1">Back to Cart</button>`,
+        3: `<button type="button" class="btn" data-go="4">I've sent the payment</button><button type="button" class="btn outline" data-go="2">Back to Shipping</button>`,
+        4: `<a class="btn" href="peptides.html">Continue Shopping</a>`
+      }[S.step];
+    }
+
+    // ---------- Send the order to the owner ----------
+    function orderLines(o) {
+      return [
+        'NEW ORDER ' + o.orderNumber, '',
+        ...o.items.map(i => `${i.qty} x ${i.name} (${i.sku}) @ ${money(i.price)} = ${money(i.lineTotal)}`), '',
+        `Boxes: ${o.boxes}`, `Subtotal: ${money(o.subtotal)}`,
+        `Shipping: ${o.shippingMethod} ${o.shipping === 0 ? 'FREE' : money(o.shipping)}`,
+        `TOTAL: ${money(o.total)}`, `Payment: ${o.paymentMethod}`, '',
+        `Name: ${o.name}`, `Address: ${o.address}`, `Email: ${o.email}`, `Phone: ${o.phone}`
+      ];
+    }
+    function mailto(o) {
+      return 'mailto:' + STORE.orderEmail + '?subject=' + encodeURIComponent('Proper Peptides order ' + o.orderNumber) + '&body=' + encodeURIComponent(orderLines(o).join('\n'));
+    }
+    function sendOrder(o) {
+      const usingFormspree = STORE.formspree && !STORE.formspree.includes('YOUR_FORM_ID');
+      if (!usingFormspree) { window.location.href = mailto(o); return; }
+      fetch(STORE.formspree, {
+        method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ ...o, _subject: 'Proper Peptides order ' + o.orderNumber, _replyto: o.email, summary: orderLines(o).join('\n') })
+      }).then(r => { if (!r.ok) throw new Error(); }).catch(() => { window.location.href = mailto(o); });
+    }
+
+    // ---------- Events ----------
     document.addEventListener('click', e => {
-      const q = e.target.closest('[data-q]'); const r = e.target.closest('[data-rm]');
-      if (q) { const c = Cart.get(); Cart.set(q.dataset.q, (c[q.dataset.q] || 0) + Number(q.dataset.d)); renderCart(); }
-      if (r) { Cart.remove(r.dataset.rm); renderCart(); }
+      const q = e.target.closest('[data-q]'); const r = e.target.closest('[data-rm]'); const g = e.target.closest('[data-go]');
+      if (q) { const c = Cart.get(); Cart.set(q.dataset.q, (c[q.dataset.q] || 0) + Number(q.dataset.d)); render(); }
+      if (r) { Cart.remove(r.dataset.rm); render(); }
+      if (g) goto(Number(g.dataset.go));
+      if (e.target.closest('#sumSubmit')) { const f = $('shipForm'); f.requestSubmit ? f.requestSubmit() : f.querySelector('[type=submit]').click(); }
     });
-    document.getElementById('checkoutBtn').addEventListener('click', async () => {
-      const btn = document.getElementById('checkoutBtn');
-      btn.disabled = true; btn.textContent = 'Redirecting to secure checkout...';
-      try {
-        const res = await fetch('/api/checkout', {
-          method: 'POST', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ items: Cart.items().map(i => ({ id: i.id, qty: i.qty })) })
-        });
-        const data = await res.json();
-        if (data.url) window.location.href = data.url;
-        else throw new Error(data.error || 'Checkout failed');
-      } catch (err) {
-        toast(err.message);
-        btn.disabled = false; btn.textContent = 'Checkout';
-      }
+    $('shipForm').addEventListener('change', e => {
+      if (e.target.name === 'ship') { S.shipId = e.target.value; CK.save(); renderSummary(totals()); }
+      if (e.target.name === 'pay') { S.pay = e.target.value; CK.save(); }
+      if (e.target.type === 'radio') e.target.closest('.opts').querySelectorAll('.opt').forEach(o => o.classList.toggle('selected', o.querySelector('input').checked));
     });
-    renderCart();
+    $('shipForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const d = new FormData(e.target);
+      ['name', 'email', 'phone', 'street', 'city', 'state', 'zip'].forEach(k => S.info[k] = String(d.get(k) || '').trim());
+      S.shipId = d.get('ship'); S.pay = d.get('pay');
+      goto(3);
+    });
+
+    // ---------- Boot ----------
+    CK.load();
+    if (S.step === 4 && (!S.order || S.sent)) CK.reset();   // a finished order starts a fresh cart on the next visit
+    render();
   </script>
 </body>
 </html>
