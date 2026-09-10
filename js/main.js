@@ -67,24 +67,30 @@ function cashLink(amount) {
 })();
 
 // ---------- Toast ----------
-function toast(msg) {
+function toast(msg, ms = 2200) {
   let t = document.querySelector('.toast');
   if (!t) { t = document.createElement('div'); t.className = 'toast'; document.body.appendChild(t); }
   t.textContent = msg;
   t.classList.add('show');
   clearTimeout(t._h);
-  t._h = setTimeout(() => t.classList.remove('show'), 2200);
+  t._h = setTimeout(() => t.classList.remove('show'), ms);
 }
 
 // ---------- Cart ----------
+// Items live in localStorage under pp_cart. A 5 minute reservation timer (pp_cart_started)
+// starts when the first item lands in an empty cart, is untouched by later adds/removes,
+// clears with the cart, pauses once the customer reaches the payment step, and empties
+// the cart when it runs out.
 const Cart = {
   key: 'pp_cart',
+  timerKey: 'pp_cart_started',
+  ttl: 5 * 60 * 1000,
   get() { try { return JSON.parse(localStorage.getItem(this.key)) || {}; } catch { return {}; } },
-  save(c) { localStorage.setItem(this.key, JSON.stringify(c)); this.badge(); },
+  save(c) { localStorage.setItem(this.key, JSON.stringify(c)); this.syncTimer(); this.badge(); this.tick(); },
   add(id, qty = 1) { const c = this.get(); c[id] = (c[id] || 0) + qty; this.save(c); },
   set(id, qty) { const c = this.get(); if (qty <= 0) delete c[id]; else c[id] = qty; this.save(c); },
   remove(id) { const c = this.get(); delete c[id]; this.save(c); },
-  clear() { localStorage.removeItem(this.key); this.badge(); },
+  clear() { localStorage.removeItem(this.key); localStorage.removeItem(this.timerKey); this.badge(); this.tick(); },
   count() { return Object.values(this.get()).reduce((a, b) => a + b, 0); },
   items() {
     const c = this.get();
@@ -97,8 +103,56 @@ const Cart = {
       el.textContent = n;
       el.style.display = n ? 'grid' : 'none';
     });
+  },
+
+  // ---- Reservation countdown ----
+  startedAt() { const t = Number(localStorage.getItem(this.timerKey)); return t > 0 ? t : null; },
+  remaining() { const t = this.startedAt(); return t ? Math.max(0, t + this.ttl - Date.now()) : null; },
+  // Payment step or later in this tab: the customer is already checking out
+  checkingOut() { try { return ((JSON.parse(sessionStorage.getItem('pp_checkout')) || {}).step || 1) >= 3; } catch { return false; } },
+  // Start on the first item, clear when empty, never reset while running
+  syncTimer() {
+    if (!this.count()) localStorage.removeItem(this.timerKey);
+    else if (!this.startedAt()) localStorage.setItem(this.timerKey, String(Date.now()));
+  },
+  tick() {
+    if (this.checkingOut()) { localStorage.removeItem(this.timerKey); this.renderTimer(null); return; }
+    this.syncTimer();
+    const ms = this.remaining();
+    if (ms === 0) { this.expire(); return; }
+    this.renderTimer(ms);
+  },
+  expire() {
+    localStorage.removeItem(this.key); localStorage.removeItem(this.timerKey);
+    this.badge(); this.renderTimer(null);
+    toast('Your cart expired and was cleared. Add your items again to keep shopping.', 5000);
+    document.dispatchEvent(new CustomEvent('cart:expired'));
+  },
+  fmt(ms) { const s = Math.ceil(ms / 1000); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); },
+  renderTimer(ms) {
+    const urgent = ms != null && ms < 60000;
+    // header badge next to the cart icon
+    let b = document.querySelector('.cart-timer');
+    if (ms == null) { if (b) b.remove(); }
+    else {
+      if (!b) {
+        const cartBtn = document.querySelector('.cart-btn');
+        if (cartBtn) { b = document.createElement('a'); b.className = 'cart-timer'; b.href = 'cart.html'; cartBtn.parentNode.insertBefore(b, cartBtn); }
+      }
+      if (b) { b.innerHTML = '<span>Cart reserved for</span> <b>' + this.fmt(ms) + '</b>'; b.classList.toggle('urgent', urgent); }
+    }
+    // full width banner on the cart page
+    const ban = document.getElementById('cartTimerBanner');
+    if (!ban) return;
+    ban.hidden = ms == null;
+    if (ms == null) return;
+    ban.classList.toggle('urgent', urgent);
+    ban.innerHTML = urgent
+      ? '<strong>Cart expires in ' + this.fmt(ms) + '</strong><span>Check out now to keep your items.</span>'
+      : '<strong>Cart reserved for ' + this.fmt(ms) + '</strong><span>Check out before the timer ends to keep your items.</span>';
   }
 };
+setInterval(() => Cart.tick(), 1000);
 
 function money(n) { return '$' + Number(n).toFixed(2); }
 
@@ -113,7 +167,7 @@ document.addEventListener('click', e => {
   toast(p.name + ' added to cart');
 });
 
-document.addEventListener('DOMContentLoaded', () => Cart.badge());
+document.addEventListener('DOMContentLoaded', () => { Cart.badge(); Cart.tick(); });
 
 // ---------- Helpers used by pages ----------
 function tileHTML(p) {

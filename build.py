@@ -385,6 +385,7 @@ cart = '''
     </section>
     <section style="padding-top:10px">
       <div class="wrap">
+        <div class="cart-timer-banner" id="cartTimerBanner" role="status" hidden></div>
         <ol class="steps" id="steps" aria-label="Checkout progress">
           <li class="active"><span class="n">1</span><span class="l">Cart</span></li>
           <li><span class="n">2</span><span class="l">Shipping</span></li>
@@ -494,7 +495,7 @@ cart_extra = r'''  <script>
       };
     }
 
-    function goto(step) { S.step = step; CK.save(); render(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+    function goto(step) { S.step = step; CK.save(); Cart.tick(); render(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
     // ---------- Order emails (api/order.js) ----------
     function apiPayload(o, status) {
@@ -657,6 +658,9 @@ cart_extra = r'''  <script>
       S.shipId = d.get('ship'); S.pay = d.get('pay'); CK.save();
       placeOrder();
     });
+
+    // Reservation timer ran out: the cart is already empty, show the empty state
+    document.addEventListener('cart:expired', () => { if (S.step < 4) render(); });
 
     // ---------- Boot ----------
     CK.load();

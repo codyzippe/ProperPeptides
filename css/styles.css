@@ -111,7 +111,7 @@ nav.main a:hover, nav.main a[aria-current="page"] { color: #fff; }
 .tile.lime { --tint: #f1fbe4; --dot: #d3ecb6; }
 .tile.lemon { --tint: #fdfbdc; --dot: #ece7a3; }
 @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-@media (prefers-reduced-motion: reduce) { .tile, .ticker-track { animation: none !important; } }
+@media (prefers-reduced-motion: reduce) { .tile, .ticker-track, .cart-timer, .cart-timer-banner { animation: none !important; } }
 
 /* Feature grid */
 .features { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-top: 56px; text-align: center; }
@@ -206,6 +206,19 @@ textarea { min-height: 140px; resize: vertical; }
 .sum-items li { display: flex; justify-content: space-between; gap: 12px; font-size: .9rem; padding: 5px 0; color: var(--text-dim); }
 .sum-items li span:first-child { color: var(--text); }
 .summary .free { color: #86efac; font-weight: 700; }
+
+/* Cart reservation countdown */
+.cart-timer { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 999px; background: rgba(74,127,214,.16); border: 1px solid rgba(143,179,255,.4); color: var(--blue-pale); font-size: .8rem; font-weight: 600; white-space: nowrap; }
+.cart-timer b { font-family: "Poppins"; font-variant-numeric: tabular-nums; color: #fff; }
+.cart-timer.urgent { background: rgba(239,68,68,.18); border-color: rgba(239,68,68,.55); color: #fecaca; animation: pulse 1s ease-in-out infinite; }
+.cart-timer-banner { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 16px; margin-top: 28px; padding: 14px 20px; border-radius: 14px; background: rgba(74,127,214,.14); border: 1px solid rgba(143,179,255,.35); transition: background .3s, border-color .3s; }
+.cart-timer-banner[hidden] { display: none; }
+.cart-timer-banner strong { font-family: "Poppins"; font-size: 1.05rem; font-variant-numeric: tabular-nums; }
+.cart-timer-banner span { color: var(--text-dim); font-size: .9rem; }
+.cart-timer-banner.urgent { background: rgba(239,68,68,.2); border-color: rgba(239,68,68,.6); animation: pulse 1s ease-in-out infinite; }
+.cart-timer-banner.urgent strong { color: #fecaca; }
+.cart-timer-banner.urgent span { color: #fff; }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,.45); } 50% { box-shadow: 0 0 0 7px rgba(239,68,68,0); } }
 
 /* Checkout steps */
 .steps { display: flex; margin-top: 36px; background: var(--navy-700); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
@@ -357,6 +370,8 @@ footer.site li a:hover { color: #fff; }
   .tile img { height: 140px; }
   .tiles { gap: 12px; }
   .cart-item { grid-template-columns: 70px 1fr; }
+  .cart-timer span { display: none; }
+  .cart-timer { padding: 6px 10px; }
   .row3, .owner-cards, .pay-manual { grid-template-columns: 1fr; }
   .owner, .panel { padding: 24px 20px; }
   .steps .l { font-size: .78rem; }
