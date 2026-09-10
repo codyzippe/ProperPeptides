@@ -156,6 +156,7 @@
         <div>
           <h4>Get In Touch</h4>
           <ul>
+            <li><a href="mailto:properpeptide@gmail.com">properpeptide@gmail.com</a></li>
             <li><a href="mailto:codyzippe1@gmail.com">codyzippe1@gmail.com</a></li>
             <li>Research Use Only</li>
           </ul>
@@ -214,6 +215,48 @@
 
     function goto(step) { S.step = step; CK.save(); render(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
+    // ---------- Order emails (api/order.js) ----------
+    function apiPayload(o, status) {
+      return {
+        number: o.orderNumber, name: o.name, email: o.email, phone: o.phone, address: o.address,
+        street: S.info.street, city: S.info.city, state: (S.info.state || '').toUpperCase(), zip: S.info.zip,
+        items: o.items.map(i => `${i.qty} x ${i.name} (SKU ${i.sku}) @ ${money(i.price)} = ${money(i.lineTotal)}`),
+        boxes: o.boxes, subtotal: o.subtotal, shipping: o.shipping, shipMethod: o.shippingMethod, total: o.total,
+        payment: o.paymentMethod, status
+      };
+    }
+    async function submitOrder(status) {
+      const res = await fetch('/api/order', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(apiPayload(S.order, status)) });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.ok) throw new Error(data.error || 'Request failed');
+    }
+    // Loading state for whichever buttons drive the current step
+    function setBusy(selector, busy, label) {
+      document.querySelectorAll(selector).forEach(b => {
+        if (busy) { b.dataset.label = b.innerHTML; b.innerHTML = label; b.disabled = true; b.classList.add('busy'); }
+        else { if (b.dataset.label) b.innerHTML = b.dataset.label; b.disabled = false; b.classList.remove('busy'); }
+      });
+    }
+    let inflight = false;
+    // Step 2 -> 3: email the order as "awaiting payment", only advance if it went through
+    async function placeOrder() {
+      if (inflight) return; inflight = true;
+      if (!S.orderNo) S.orderNo = orderNumber();
+      S.order = buildOrder(); CK.save();
+      setBusy('#sumSubmit, .form-continue', true, 'Submitting order&hellip;');
+      try { await submitOrder('awaiting payment'); goto(3); }
+      catch (e) { toast('Could not submit order, please try again'); setBusy('#sumSubmit, .form-continue', false); }
+      inflight = false;
+    }
+    // Step 3 -> 4: email again as "customer says paid", then clear the cart
+    async function confirmPaid() {
+      if (inflight) return; inflight = true;
+      setBusy('[data-paid]', true, 'Sending&hellip;');
+      try { await submitOrder('customer says paid'); S.sent = true; CK.save(); Cart.clear(); goto(4); }
+      catch (e) { toast('Could not submit order, please try again'); setBusy('[data-paid]', false); }
+      inflight = false;
+    }
+
     // ---------- Render ----------
     function render() {
       const t = totals();
@@ -265,8 +308,6 @@
     }
 
     function renderPayment() {
-      if (!S.orderNo) S.orderNo = orderNumber();
-      S.order = buildOrder(); CK.save();
       const o = S.order; const cash = S.pay === 'cashapp';
       const link = cash ? cashLink(o.total) : venmoLink(o.total, 'Proper Peptides order ' + o.orderNumber);
       $('step3').innerHTML = `
@@ -281,20 +322,19 @@
             <div><small>Note</small><strong>${o.orderNumber}</strong></div>
           </div>
           <p class="muted">On a desktop? Open ${payName(S.pay)} on your phone and send ${money(o.total)} to ${payHandle(S.pay)} with the note ${o.orderNumber}.</p>
-          <button type="button" class="btn" data-go="4">I've sent the payment</button>
+          <button type="button" class="btn" data-paid>I've sent the payment</button>
         </div>`;
     }
 
     function renderDone() {
       const o = S.order;
-      if (!S.sent) { S.sent = true; CK.save(); sendOrder(o); Cart.clear(); }
       $('step4').innerHTML = `
         <div class="panel done-panel">
           <div class="check-mark"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg></div>
           <span class="tag">Order ${o.orderNumber}</span>
           <h3>Thanks, ${esc((o.name || '').split(' ')[0])}. Your order is in.</h3>
-          <p>We'll confirm your ${payName(S.pay)} payment and email a FedEx tracking number to <strong>${esc(o.email)}</strong> as soon as your order ships.</p>
-          <p class="muted">Keep your order number handy. Questions? <a href="mailto:${STORE.orderEmail}">${STORE.orderEmail}</a></p>
+          <p>Your order details have been emailed to us and a confirmation was sent to <strong>${esc(o.email)}</strong>. Once we confirm your payment we'll ship with FedEx and email your tracking number.</p>
+          <p class="muted">Keep your order number handy. Questions? <a href="mailto:${STORE.ownerEmails[0]}">${STORE.ownerEmails[0]}</a></p>
           <div style="margin-top:24px"><a class="btn" href="peptides.html">Continue Shopping</a></div>
         </div>`;
     }
@@ -310,32 +350,9 @@
       $('sumActions').innerHTML = {
         1: `<button type="button" class="btn" data-go="2">Continue to Shipping ${next}</button>`,
         2: `<button type="button" class="btn" id="sumSubmit">Continue to Payment ${next}</button><button type="button" class="btn outline" data-go="1">Back to Cart</button>`,
-        3: `<button type="button" class="btn" data-go="4">I've sent the payment</button><button type="button" class="btn outline" data-go="2">Back to Shipping</button>`,
+        3: `<button type="button" class="btn" data-paid>I've sent the payment</button><button type="button" class="btn outline" data-go="2">Back to Shipping</button>`,
         4: `<a class="btn" href="peptides.html">Continue Shopping</a>`
       }[S.step];
-    }
-
-    // ---------- Send the order to the owner ----------
-    function orderLines(o) {
-      return [
-        'NEW ORDER ' + o.orderNumber, '',
-        ...o.items.map(i => `${i.qty} x ${i.name} (${i.sku}) @ ${money(i.price)} = ${money(i.lineTotal)}`), '',
-        `Boxes: ${o.boxes}`, `Subtotal: ${money(o.subtotal)}`,
-        `Shipping: ${o.shippingMethod} ${o.shipping === 0 ? 'FREE' : money(o.shipping)}`,
-        `TOTAL: ${money(o.total)}`, `Payment: ${o.paymentMethod}`, '',
-        `Name: ${o.name}`, `Address: ${o.address}`, `Email: ${o.email}`, `Phone: ${o.phone}`
-      ];
-    }
-    function mailto(o) {
-      return 'mailto:' + STORE.orderEmail + '?subject=' + encodeURIComponent('Proper Peptides order ' + o.orderNumber) + '&body=' + encodeURIComponent(orderLines(o).join('\n'));
-    }
-    function sendOrder(o) {
-      const usingFormspree = STORE.formspree && !STORE.formspree.includes('YOUR_FORM_ID');
-      if (!usingFormspree) { window.location.href = mailto(o); return; }
-      fetch(STORE.formspree, {
-        method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ ...o, _subject: 'Proper Peptides order ' + o.orderNumber, _replyto: o.email, summary: orderLines(o).join('\n') })
-      }).then(r => { if (!r.ok) throw new Error(); }).catch(() => { window.location.href = mailto(o); });
     }
 
     // ---------- Events ----------
@@ -344,6 +361,7 @@
       if (q) { const c = Cart.get(); Cart.set(q.dataset.q, (c[q.dataset.q] || 0) + Number(q.dataset.d)); render(); }
       if (r) { Cart.remove(r.dataset.rm); render(); }
       if (g) goto(Number(g.dataset.go));
+      if (e.target.closest('[data-paid]')) confirmPaid();
       if (e.target.closest('#sumSubmit')) { const f = $('shipForm'); f.requestSubmit ? f.requestSubmit() : f.querySelector('[type=submit]').click(); }
     });
     $('shipForm').addEventListener('change', e => {
@@ -355,8 +373,8 @@
       e.preventDefault();
       const d = new FormData(e.target);
       ['name', 'email', 'phone', 'street', 'city', 'state', 'zip'].forEach(k => S.info[k] = String(d.get(k) || '').trim());
-      S.shipId = d.get('ship'); S.pay = d.get('pay');
-      goto(3);
+      S.shipId = d.get('ship'); S.pay = d.get('pay'); CK.save();
+      placeOrder();
     });
 
     // ---------- Boot ----------

@@ -2,5 +2,8 @@
   "name": "properpeptides",
   "version": "1.0.0",
   "private": true,
-  "description": "Proper Peptides static site (Venmo / Cash App checkout) on Vercel"
+  "description": "Proper Peptides static site (Venmo / Cash App checkout, order emails via Resend) on Vercel",
+  "dependencies": {
+    "resend": "^4.0.0"
+  }
 }

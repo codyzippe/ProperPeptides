@@ -7,8 +7,7 @@
 const STORE = {
   venmoUser: "theproperpeptides",                 // https://www.venmo.com/u/theproperpeptides
   cashTag: "theproperpeptides",                   // https://cash.app/$theproperpeptides
-  orderEmail: "codyzippe1@gmail.com",             // where orders are sent
-  formspree: "https://formspree.io/f/YOUR_FORM_ID", // optional: paste a real Formspree endpoint to receive orders as JSON
+  ownerEmails: ["properpeptide@gmail.com", "codyzippe1@gmail.com"], // display only; orders are emailed by api/order.js
   freeShipQty: 6,                                 // boxes needed for free FedEx shipping
   shipping: [
     { id: "ground",    name: "FedEx Ground",    price: 15, eta: "3 to 5 business days" },
