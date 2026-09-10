@@ -19,11 +19,11 @@ Each POST sends two emails through Resend: a full order email to **properpeptide
 
 ## Order email setup (Resend)
 1. Create a free account at [resend.com](https://resend.com).
-2. In Resend go to **Domains > Add Domain** and enter `properpeptides.com`. Resend shows a few DNS records (DKIM, SPF, and a return path). Add each one in **Vercel > your project > Domains > properpeptides.com > DNS Records** (or wherever the domain's DNS is managed), then click **Verify** in Resend.
+2. In Resend go to **Domains > Add Domain** and enter `theproperpeptide.com`. Resend shows a few DNS records (DKIM, SPF, and a return path). Add each one in **Vercel > your project > Domains > theproperpeptide.com > DNS Records** (or wherever the domain's DNS is managed), then click **Verify** in Resend.
 3. In Resend go to **API Keys > Create API Key** (sending access is enough) and copy the key.
 4. In **Vercel > Project > Settings > Environment Variables** add:
    - `RESEND_API_KEY` = the key from step 3 (required)
-   - `ORDER_FROM` = the From address, optional. Defaults to `Proper Peptides Orders <orders@properpeptides.com>`. It must be on the verified domain.
+   - `ORDER_FROM` = the From address, for example `Proper Peptides Orders <orders@theproperpeptide.com>`. It **must** be an address on the verified theproperpeptide.com domain, so set this. (The code default is `orders@properpeptides.com`, which will not send.)
 5. **Redeploy** the project so the function picks up the variables.
 
 Until the domain is verified, Resend will only deliver to the email address on your Resend account and anything else is rejected, so verify the domain before going live. The API key is only ever read by the serverless function; the browser never sees it.
@@ -58,7 +58,7 @@ Set `price` for each product in `js/products.js`. All four are currently $120 pe
 
 ## Deploy
 Push to GitHub, then in Vercel: New Project > Import the repo > Deploy. Framework preset: **Other**. No build command needed. Add the `RESEND_API_KEY` environment variable (see above) so order emails work.
-Add your domain (properpeptides.com) under Settings > Domains.
+Add your domain (theproperpeptide.com) under Settings > Domains.
 
 ## Editing
 The HTML pages share a header and footer. Edit `build.py` and run `python3 build.py` to regenerate all pages. Otherwise edit the HTML files directly.

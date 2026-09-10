@@ -296,14 +296,14 @@ about = '''
             <div class="owner-cards">
               <div class="card">
                 <h4>Business email</h4>
-                <p><a href="mailto:properpeptide@gmail.com">properpeptide@gmail.com</a></p>
+                <p><a href="mailto:codyzippe1@gmail.com">codyzippe1@gmail.com</a></p>
               </div>
               <div class="card">
                 <h4>Business inquiries</h4>
                 <p>For sales, wholesale, and partnership inquiries, email Cody directly.</p>
               </div>
             </div>
-            <a class="btn" href="mailto:properpeptide@gmail.com">Email Cody <svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg></a>
+            <a class="btn" href="mailto:codyzippe1@gmail.com">Email Cody <svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg></a>
           </div>
         </div>
       </div>
