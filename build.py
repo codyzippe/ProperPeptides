@@ -8,7 +8,7 @@ HEAD = '''<!DOCTYPE html>
   <title>{title} | Proper Peptides</title>
   <meta name="description" content="{desc}">
   <link rel="canonical" href="{url}">
-{og}  <link rel="icon" href="assets/logo.svg">
+{og}{head_extra}  <link rel="icon" href="assets/logo.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -130,11 +130,11 @@ OG = '''  <meta property="og:type" content="website">
 def page_url(name):
     return SITE + '/' + ('' if name == 'index.html' else name[:-5])
 
-def page(name, title, desc, body, current, extra='', ticker=False, og=False):
+def page(name, title, desc, body, current, extra='', ticker=False, og=False, head_extra=''):
     cur = {k: (' aria-current="page"' if k == current else '') for k in ['home','pep','about','contact']}
     url = page_url(name)
     og_tags = OG.format(title=title, desc=desc, image=OG_IMAGE.replace(' ', '%20'), url=url) if og else ''
-    html = HEAD.format(title=title, desc=desc, url=url, og=og_tags, ticker=(TICKER if ticker else ''), c_home=cur['home'], c_pep=cur['pep'], c_about=cur['about'], c_contact=cur['contact']) + body + FOOT.format(extra=extra)
+    html = HEAD.format(title=title, desc=desc, url=url, og=og_tags, head_extra=head_extra, ticker=(TICKER if ticker else ''), c_home=cur['home'], c_pep=cur['pep'], c_about=cur['about'], c_contact=cur['contact']) + body + FOOT.format(extra=extra)
     open(name, 'w').write(html)
 
 # ---------------- HOME ----------------
@@ -200,7 +200,8 @@ home_extra = '''  <script>
     if (window.innerWidth < 1024) document.querySelector('.cats').style.gridTemplateColumns = 'repeat(2, 1fr)';
     if (window.innerWidth < 640) document.querySelector('.cats').style.gridTemplateColumns = '1fr';
   </script>'''
-page('index.html', 'Premium Research Peptides', 'Proper Peptides: authorized reseller of thePeptide lab tested research peptides. GLOW, Wolverine, NAD+, CJC-1295/Ipamorelin.', home, 'home', home_extra, ticker=True, og=True)
+page('index.html', 'Premium Research Peptides', 'Proper Peptides: authorized reseller of thePeptide lab tested research peptides. GLOW, Wolverine, NAD+, CJC-1295/Ipamorelin.', home, 'home', home_extra, ticker=True, og=True,
+     head_extra='  <meta name="google-site-verification" content="3orrgi-qReCQwUGjqSRBCoDyfLiaDjIUaHbaigQT_Gg" />\n')
 
 # ---------------- PEPTIDES ----------------
 pep = '''
