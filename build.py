@@ -357,7 +357,7 @@ contact = '''
             <p style="font-size:.85rem">Research use only. We cannot answer questions about human use.</p>
           </div>
           <div class="contact-card">
-            <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+            <form id="contactForm">
               <div class="row2">
                 <div class="field"><label for="name">Name</label><input id="name" name="name" required></div>
                 <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required></div>
@@ -369,14 +369,23 @@ contact = '''
               </div>
               <div class="field"><label for="message">Message</label><textarea id="message" name="message" required></textarea></div>
               <button class="btn" type="submit">Send Message</button>
-              <p style="font-size:.8rem;color:var(--text-dim);margin-top:12px">This form posts to Formspree. Create a free form at formspree.io and paste your form ID into the action URL in contact.html.</p>
+              <p style="font-size:.8rem;color:var(--text-dim);margin-top:12px">This opens your email app with the message ready to send.</p>
             </form>
           </div>
         </div>
       </div>
     </section>
 '''
-page('contact.html', 'Contact', 'Contact Proper Peptides by email for product questions, order status, and wholesale inquiries. Research use only.', contact, 'contact')
+contact_extra = '''  <script>
+    // No backend: the form opens the visitor's email app with everything pre filled.
+    document.getElementById('contactForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const f = e.target.elements;   // form.name would be the form's own name attribute, so go through elements
+      const body = 'From: ' + f.name.value.trim() + ' (' + f.email.value.trim() + ')\\n\\n' + f.message.value.trim();
+      window.location.href = 'mailto:properpeptide@gmail.com?subject=' + encodeURIComponent(f.subject.value) + '&body=' + encodeURIComponent(body);
+    });
+  </script>'''
+page('contact.html', 'Contact', 'Contact Proper Peptides by email for product questions, order status, and wholesale inquiries. Research use only.', contact, 'contact', contact_extra)
 
 # ---------------- CART / CHECKOUT ----------------
 cart = '''

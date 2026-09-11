@@ -6,7 +6,7 @@ Static site (HTML, CSS, JS) hosted on Vercel, plus one serverless function (`api
 - `index.html` Home (landing page)
 - `peptides.html` the four thePeptide products with Add to Cart and composition / specification details
 - `about.html` About thePeptide (manufacturer), Proper Peptides, and the Meet the owner section
-- `contact.html` contact form (Formspree)
+- `contact.html` contact form (opens the visitor's email app addressed to properpeptide@gmail.com)
 - `cart.html` cart and 4 step checkout (Cart > Shipping > Payment > Done)
 
 ## How checkout works
@@ -53,8 +53,7 @@ Set `price` for each product in `js/products.js`. All four are currently $120 pe
 1. **Logo**: replace `assets/logo.svg` with your real logo.
 2. **Headshot**: `assets/cody.jpg` is used on the About page.
 3. **Order emails**: follow the Resend setup above and add `RESEND_API_KEY` in Vercel.
-4. **Contact form**: paste your Formspree form ID into the `action` URL in `contact.html` (or in `build.py` and rebuild).
-5. **Product images**: currently loaded from thePeptide's S3 bucket. Download them into `assets/` and update `image` in `js/products.js` if you want to self host.
+4. **Product images**: currently loaded from thePeptide's S3 bucket. Download them into `assets/` and update `image` in `js/products.js` if you want to self host.
 
 ## Deploy
 Push to GitHub, then in Vercel: New Project > Import the repo > Deploy. Framework preset: **Other**. No build command needed. Add the `RESEND_API_KEY` environment variable (see above) so order emails work.
