@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Buy Research Peptides Online | Peptide Strips - Proper Peptides</title>
-  <meta name="description" content="Browse our full peptide blend lineup: GLOW (GHK-Cu/BPC-157/TB-500), Wolverine, NAD+, and CJC-1295/Ipamorelin. Lab-tested peptide strips, $120 each, ships fast.">
+  <title>Research Peptides | Proper Peptides</title>
+  <meta name="description" content="GLOW, Wolverine, NAD+, and CJC-1295/Ipamorelin research grade peptide reference materials. Lab tested. $120 per box. Sold for laboratory research use only.">
   <link rel="canonical" href="https://theproperpeptide.com/peptides">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
@@ -58,7 +58,7 @@
       <div class="wrap center">
         <span class="eyebrow">thePeptide &bull; Lab Tested &bull; Research Use Only</span>
         <h1>Our Peptides</h1>
-        <p class="sub">Four research blends manufactured for thePeptide. Every product is lab tested for purity and shipped with tracking.</p>
+        <p class="sub">Four research compounds manufactured for thePeptide. Every product is lab tested for identity and purity and shipped with tracking.</p>
       </div>
     </section>
     <section style="padding-top:20px">
@@ -80,7 +80,7 @@
       <div class="foot-grid">
         <div>
           <a class="logo" href="index.html"><img src="assets/logo.svg" alt="Proper Peptides"></a>
-          <p style="margin-top:16px">Authorized reseller of thePeptide research grade peptides. Premium research grade peptides for scientific and laboratory applications.</p>
+          <p style="margin-top:16px">Authorized reseller of thePeptide research compounds, sold for laboratory research use only.</p>
         </div>
         <div>
           <h4>Products</h4>
@@ -131,13 +131,13 @@
             <div class="price">${p.price ? money(p.price) : 'Contact for price'}<small>${p.price ? 'USD' : ''}</small></div>
             <button class="btn sm" data-add="${p.id}">Add to Cart</button>
           </div>
-          <a class="details-link" href="#" data-detail="${p.id}">View research details &darr;</a>
+          <a class="details-link" href="#" data-detail="${p.id}">View composition and specifications &darr;</a>
         </div>
       </article>
       <div class="detail" id="detail-${p.id}">
         <button class="btn sm outline close" data-close="${p.id}">Close</button>
         <h3>${p.name} ${p.subtitle}</h3>
-        ${p.sections.map(s => `<h4>${s.h}</h4><p>${s.p}</p>${s.li.length ? '<ul>' + s.li.map(l => `<li>${l}</li>`).join('') + '</ul>' : ''}`).join('')}
+        ${p.sections.map(s => `<h4>${s.h}</h4>${s.p ? `<p>${s.p}</p>` : ''}${s.li.length ? '<ul>' + s.li.map(l => `<li>${l}</li>`).join('') + '</ul>' : ''}`).join('')}
       </div>`).join('');
 
     grid.addEventListener('click', e => {

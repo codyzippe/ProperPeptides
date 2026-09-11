@@ -4,7 +4,7 @@ Static site (HTML, CSS, JS) hosted on Vercel, plus one serverless function (`api
 
 ## Pages
 - `index.html` Home (landing page)
-- `peptides.html` the four thePeptide products with Add to Cart and research details
+- `peptides.html` the four thePeptide products with Add to Cart and composition / specification details
 - `about.html` About thePeptide (manufacturer), Proper Peptides, and the Meet the owner section
 - `contact.html` contact form (Formspree)
 - `cart.html` cart and 4 step checkout (Cart > Shipping > Payment > Done)

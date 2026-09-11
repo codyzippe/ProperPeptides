@@ -84,7 +84,7 @@ function wrap(heading, intro, inner) {
       ${intro ? `<p style="margin:0 0 6px;color:#3b4a61;font-size:15px;line-height:1.55">${intro}</p>` : ''}
       ${inner}
     </div>
-    <p style="margin:16px 0 0;color:#7a879a;font-size:12px;text-align:center">Research use only. Proper Peptides, authorized reseller of thePeptide.</p>
+    <p style="margin:16px 0 0;color:#7a879a;font-size:12px;text-align:center">Proper Peptides, authorized reseller of thePeptide research compounds. Sold for laboratory research use only.</p>
   </div></body></html>`;
 }
 function textVersion(heading, r) {

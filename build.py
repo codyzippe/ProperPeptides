@@ -58,8 +58,8 @@ HEAD = '''<!DOCTYPE html>
 '''
 TICKER = '''  <div class="ticker" aria-hidden="true">
     <div class="ticker-track">
-      <span>Premium Research Peptides</span><span>Quality Assured &amp; Lab Tested</span><span>Fast Shipping</span><span>99%+ Purity Guaranteed</span><span>For Research Purposes Only</span>
-      <span>Premium Research Peptides</span><span>Quality Assured &amp; Lab Tested</span><span>Fast Shipping</span><span>99%+ Purity Guaranteed</span><span>For Research Purposes Only</span>
+      <span>Research Grade Peptides</span><span>Lab Tested</span><span>Fast Shipping</span><span>Research Use Only</span>
+      <span>Research Grade Peptides</span><span>Lab Tested</span><span>Fast Shipping</span><span>Research Use Only</span>
     </div>
   </div>
 '''
@@ -77,7 +77,7 @@ FOOT = '''  </main>
       <div class="foot-grid">
         <div>
           <a class="logo" href="index.html"><img src="assets/logo.svg" alt="Proper Peptides"></a>
-          <p style="margin-top:16px">Authorized reseller of thePeptide research grade peptides. Premium research grade peptides for scientific and laboratory applications.</p>
+          <p style="margin-top:16px">Authorized reseller of thePeptide research compounds, sold for laboratory research use only.</p>
         </div>
         <div>
           <h4>Products</h4>
@@ -147,9 +147,9 @@ home = '''
     <section class="hero">
       <div class="wrap">
         <div>
-          <span class="eyebrow">Lab Tested &bull; $120 per box &bull; Free FedEx shipping on 6+ boxes</span>
-          <h1>Unlock Peak Performance with <span>Proper Peptides</span></h1>
-          <p class="sub">Premium research grade peptide compounds from thePeptide, designed for laboratory research and scientific study. Four rigorously tested blends at $120 per box, with free FedEx shipping on 6 or more boxes.</p>
+          <span class="eyebrow">Lab Tested &bull; Research Use Only</span>
+          <h1>Research Grade Peptides from <span>Proper Peptides</span></h1>
+          <p class="sub">Authorized reseller of thePeptide research compounds. Four lab tested peptide products, sold exclusively for laboratory and in vitro research use. $120 per box. Free FedEx shipping on 6 or more boxes.</p>
           <div class="hero-actions">
             <a class="btn" href="peptides.html">Browse Peptides <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
             <a class="btn outline" href="about.html">About thePeptide</a>
@@ -169,16 +169,16 @@ home = '''
         <h2>Why Choose Proper Peptides</h2>
         <p class="sub">Trusted for quality, purity, and reliability, backed by thePeptide's vetted US based manufacturing</p>
         <div class="features">
-          <div class="feature"><div class="ico"><svg viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/></svg></div><h3>Premium Quality</h3><p>Rigorously tested peptides meeting the highest standards for research applications</p></div>
+          <div class="feature"><div class="ico"><svg viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/></svg></div><h3>Premium Quality</h3><p>Every batch is accompanied by third party testing for identity and purity.</p></div>
           <div class="feature"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/></svg></div><h3>Lab Certified</h3><p>Each batch verified for purity and composition with detailed documentation</p></div>
           <div class="feature"><div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M3 11h18M8 7V5h8v2"/></svg></div><h3>Secure Packaging</h3><p>Professional grade packaging with proper storage and handling specifications</p></div>
-          <div class="feature"><div class="ico"><svg viewBox="0 0 24 24"><path d="M6 3h6v6l-4 9a2 2 0 0 0 2 3h4M18 3v6l4 9"/></svg></div><h3>Research Grade</h3><p>Designed exclusively for laboratory and scientific research purposes</p></div>
+          <div class="feature"><div class="ico"><svg viewBox="0 0 24 24"><path d="M6 3h6v6l-4 9a2 2 0 0 0 2 3h4M18 3v6l4 9"/></svg></div><h3>Research Grade</h3><p>Sold exclusively for laboratory and in vitro research</p></div>
         </div>
         <div class="callout" style="text-align:left">
           <div class="ico">i</div>
           <div>
             <h3>Important: Research Use Only</h3>
-            <p>All peptides sold by Proper Peptides are intended for research purposes only and are not for human consumption. These products are designed for use in laboratory settings by qualified researchers.</p>
+            <p>These products are sold as chemical reference materials for laboratory research only. They are not for human or veterinary use, and no claims are made about their effects.</p>
           </div>
         </div>
       </div>
@@ -186,8 +186,8 @@ home = '''
 
     <section style="background:var(--navy-900)">
       <div class="wrap center">
-        <h2>Proper's Most Popular</h2>
-        <p class="sub">Explore our four thePeptide research blends</p>
+        <h2>Available Products</h2>
+        <p class="sub">Four thePeptide research compounds</p>
         <div class="cats" id="homeCats"></div>
       </div>
     </section>
@@ -205,7 +205,7 @@ home_extra = '''  <script>
     if (window.innerWidth < 1024) document.querySelector('.cats').style.gridTemplateColumns = 'repeat(2, 1fr)';
     if (window.innerWidth < 640) document.querySelector('.cats').style.gridTemplateColumns = '1fr';
   </script>'''
-page('index.html', 'Proper Peptides | Research Peptide Strips - GLOW, NAD+, CJC-1295 & More', 'Shop lab-tested research peptide strips from Proper Peptides. GLOW, Wolverine, NAD+, and CJC-1295/Ipamorelin blends, 99%+ purity, fast FedEx shipping. Research use only.', home, 'home', home_extra, ticker=True, og=True,
+page('index.html', 'Proper Peptides | Research Peptides - GLOW, NAD+, CJC-1295 & More', 'Research grade peptide reference materials. GLOW, Wolverine, NAD+, CJC-1295/Ipamorelin. Lab tested. Sold for laboratory research use only.', home, 'home', home_extra, ticker=True, og=True,
      head_extra='  <meta name="google-site-verification" content="3orrgi-qReCQwUGjqSRBCoDyfLiaDjIUaHbaigQT_Gg" />\n')
 
 # ---------------- PEPTIDES ----------------
@@ -214,7 +214,7 @@ pep = '''
       <div class="wrap center">
         <span class="eyebrow">thePeptide &bull; Lab Tested &bull; Research Use Only</span>
         <h1>Our Peptides</h1>
-        <p class="sub">Four research blends manufactured for thePeptide. Every product is lab tested for purity and shipped with tracking.</p>
+        <p class="sub">Four research compounds manufactured for thePeptide. Every product is lab tested for identity and purity and shipped with tracking.</p>
       </div>
     </section>
     <section style="padding-top:20px">
@@ -237,13 +237,13 @@ pep_extra = '''  <script>
             <div class="price">${p.price ? money(p.price) : 'Contact for price'}<small>${p.price ? 'USD' : ''}</small></div>
             <button class="btn sm" data-add="${p.id}">Add to Cart</button>
           </div>
-          <a class="details-link" href="#" data-detail="${p.id}">View research details &darr;</a>
+          <a class="details-link" href="#" data-detail="${p.id}">View composition and specifications &darr;</a>
         </div>
       </article>
       <div class="detail" id="detail-${p.id}">
         <button class="btn sm outline close" data-close="${p.id}">Close</button>
         <h3>${p.name} ${p.subtitle}</h3>
-        ${p.sections.map(s => `<h4>${s.h}</h4><p>${s.p}</p>${s.li.length ? '<ul>' + s.li.map(l => `<li>${l}</li>`).join('') + '</ul>' : ''}`).join('')}
+        ${p.sections.map(s => `<h4>${s.h}</h4>${s.p ? `<p>${s.p}</p>` : ''}${s.li.length ? '<ul>' + s.li.map(l => `<li>${l}</li>`).join('') + '</ul>' : ''}`).join('')}
       </div>`).join('');
 
     grid.addEventListener('click', e => {
@@ -253,7 +253,7 @@ pep_extra = '''  <script>
     });
     if (location.hash) { const t = document.querySelector(location.hash); if (t) setTimeout(() => t.scrollIntoView({ behavior: 'smooth', block: 'center' }), 200); }
   </script>'''
-page('peptides.html', 'Buy Research Peptides Online | Peptide Strips - Proper Peptides', 'Browse our full peptide blend lineup: GLOW (GHK-Cu/BPC-157/TB-500), Wolverine, NAD+, and CJC-1295/Ipamorelin. Lab-tested peptide strips, $120 each, ships fast.', pep, 'pep', pep_extra)
+page('peptides.html', 'Research Peptides | Proper Peptides', 'GLOW, Wolverine, NAD+, and CJC-1295/Ipamorelin research grade peptide reference materials. Lab tested. $120 per box. Sold for laboratory research use only.', pep, 'pep', pep_extra)
 
 # ---------------- ABOUT ----------------
 about = '''
@@ -262,7 +262,7 @@ about = '''
         <div class="about-grid">
           <div>
             <span class="eyebrow">About thePeptide</span>
-            <h1>Rigorous Standards, Reliable Results</h1>
+            <h1>Rigorous Standards, Verified Purity</h1>
             <p class="sub" style="margin-top:18px">Proper Peptides is an authorized reseller of thePeptide, a US based research peptide company. Every product on this site is manufactured for thePeptide and sold through Proper Peptides.</p>
           </div>
           <div class="tiles" id="aboutTiles"></div>
@@ -275,17 +275,17 @@ about = '''
         <div class="about-grid">
           <div>
             <h2>Delivering Clean, Reliable Peptides, Every Time</h2>
-            <p style="margin-top:16px">thePeptide's mission is simple: make high quality peptides easy to access, easy to trust, and easy to order. The focus is on what matters most: purity, safety, and real value.</p>
-            <p>Every product is lab tested for verified quality and shipped discreetly with care. thePeptide partners with vetted, US based facilities that implement the highest standard of care in preparing products. Peptides are carefully synthesized and tested to meet the exacting needs of scientists, healthcare professionals, and research institutions.</p>
-            <p>thePeptide is not a compounding facility. It is a partner in peptide innovation, offering ready to ship, lab tested peptides designed for consistency, performance, and ease of access.</p>
+            <p style="margin-top:16px">thePeptide's mission is simple: make high quality peptides easy to access, easy to trust, and easy to order. The focus is on what matters most: purity, consistency, and real value.</p>
+            <p>Every product is lab tested for verified quality and shipped discreetly with care. thePeptide partners with vetted, US based facilities that implement the highest standard of care in preparing products. Peptides are carefully synthesized and tested to meet the exacting needs of research laboratories and institutions.</p>
+            <p>thePeptide is not a compounding facility. It is a partner in peptide innovation, offering ready to ship, lab tested peptides with consistent documentation and ease of access.</p>
           </div>
           <div>
             <h2 style="font-size:1.6rem">Why Choose thePeptide?</h2>
             <div class="pillars" style="margin-top:20px">
-              <div class="pillar"><h3>Uncompromising Quality</h3><p>Every product is tested for purity, potency, and reliability.</p></div>
+              <div class="pillar"><h3>Uncompromising Quality</h3><p>Every product is tested for identity, purity, and consistency.</p></div>
               <div class="pillar"><h3>Vetted Ingredients</h3><p>Sourced exclusively from vetted, US based facilities that implement the highest standard of care.</p></div>
               <div class="pillar"><h3>No Outsourcing of Standards</h3><p>Quality benchmarks guide every step of the process.</p></div>
-              <div class="pillar"><h3>Professionally Packed, Shipped with Tracking</h3><p>Fast fulfillment with support you can count on.</p></div>
+              <div class="pillar"><h3>Professionally Packed, Shipped with Tracking</h3><p>Fast fulfillment with tracking on every order.</p></div>
             </div>
           </div>
         </div>
@@ -295,10 +295,10 @@ about = '''
     <section style="background:var(--navy-900)">
       <div class="wrap center">
         <h2>Our Commitment to Quality</h2>
-        <p class="sub">thePeptide goes beyond industry standards to bring you peptides of unmatched purity and effectiveness</p>
+        <p class="sub">thePeptide goes beyond industry standards to supply peptides of verified identity and purity</p>
         <div class="features">
           <div class="feature"><div class="ico"><svg viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/></svg></div><h3>Meticulously Vetted Raw Materials</h3><p>Sourced exclusively from vetted, US based facilities</p></div>
-          <div class="feature"><div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>Rigorous Quality Control</h3><p>Every batch lab tested for purity and potency before it ships</p></div>
+          <div class="feature"><div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>Rigorous Quality Control</h3><p>Every batch lab tested for identity and purity before it ships</p></div>
           <div class="feature"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div><h3>Decades of Peptide Innovation</h3><p>Built on long standing peptide research and manufacturing experience</p></div>
           <div class="feature"><div class="ico"><svg viewBox="0 0 24 24"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.5"/><circle cx="17" cy="18" r="1.5"/></svg></div><h3>Reliable Shipping and Tracking</h3><p>On all orders, professionally packed</p></div>
         </div>
@@ -330,13 +330,13 @@ about = '''
     <section style="padding-top:0">
       <div class="wrap center">
         <h2>Proper Peptides &times; thePeptide</h2>
-        <p class="sub">Proper Peptides sells thePeptide's four research blends directly. Same lab tested products, same manufacturer, ordered through properpeptides.com.</p>
+        <p class="sub">Proper Peptides sells thePeptide's four research blends directly. Same lab tested products, same manufacturer, ordered through theproperpeptide.com.</p>
         <div style="margin-top:28px"><a class="btn" href="peptides.html">Shop the Peptides</a></div>
       </div>
     </section>
 '''
 about_extra = '''  <script>document.getElementById('aboutTiles').innerHTML = PRODUCTS.map(tileHTML).join('');</script>'''
-page('about.html', 'About Us', 'About thePeptide, the US based research peptide manufacturer behind Proper Peptides products.', about, 'about', about_extra)
+page('about.html', 'About Us', 'About thePeptide, the US based manufacturer of the research grade peptide reference materials sold by Proper Peptides. Lab tested. Research use only.', about, 'about', about_extra)
 
 # ---------------- CONTACT ----------------
 contact = '''
@@ -431,7 +431,7 @@ cart = '''
                   <label class="opt"><input type="radio" name="pay" value="cashapp" required><span class="ico cashapp">$</span><span class="body"><strong>Cash App</strong><small>$theproperpeptides</small></span></label>
                 </div>
 
-                <label class="agree"><input type="checkbox" name="agree" required><span>I confirm I am 18+ and these products are for research use only.</span></label>
+                <label class="agree"><input type="checkbox" name="agree" required><span>I confirm I am 18 or older, that I am purchasing for laboratory research use only, and that these products are not for human or veterinary use.</span></label>
                 <button class="btn form-continue" type="submit">Continue to Payment <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
               </form>
             </div>
