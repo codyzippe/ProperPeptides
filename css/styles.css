@@ -326,7 +326,7 @@ footer.site li a:hover { color: #fff; }
 
 /* Age gate */
 .gate { position: fixed; inset: 0; background: #000; z-index: 100; display: grid; place-items: center; padding: 20px; }
-.gate[hidden] { display: none; }
+.gate[hidden], .age-ok .gate { display: none; }
 .gate .card { background: #fff; color: #111; border-radius: 22px; padding: 44px 40px; max-width: 480px; width: 100%; text-align: center; }
 .gate .ring { width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 24px; background: linear-gradient(135deg, #5b6cf0, #a34bd9); display: grid; place-items: center; color: #fff; font-family: "Poppins"; font-weight: 700; font-size: 1.4rem; }
 .gate h2 { font-size: 1.7rem; margin-bottom: 10px; color: #111; }

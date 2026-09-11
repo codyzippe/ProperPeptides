@@ -16,6 +16,7 @@ HEAD = '''<!DOCTYPE html>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <script>try{{if(localStorage.getItem('pp_age_ok')==='1')document.documentElement.classList.add('age-ok')}}catch(e){{}}</script>
 </head>
 <body>
 

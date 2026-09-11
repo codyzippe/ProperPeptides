@@ -40,14 +40,19 @@ function cashLink(amount) {
 }
 
 // ---------- Age gate ----------
+// The inline script in <head> hides the gate before first paint when pp_age_ok is set;
+// this keeps the state in sync and wires the buttons. localStorage persists across pages and visits.
 (function ageGate() {
   const gate = document.getElementById('ageGate');
   if (!gate) return;
-  if (localStorage.getItem('pp_age_ok') === '1') { gate.hidden = true; return; }
+  let ok = false;
+  try { ok = localStorage.getItem('pp_age_ok') === '1'; } catch (e) {}
+  if (ok) { gate.hidden = true; document.documentElement.classList.add('age-ok'); return; }
   document.body.style.overflow = 'hidden';
   gate.querySelector('.yes').addEventListener('click', () => {
-    localStorage.setItem('pp_age_ok', '1');
+    try { localStorage.setItem('pp_age_ok', '1'); } catch (e) {}
     gate.hidden = true;
+    document.documentElement.classList.add('age-ok');
     document.body.style.overflow = '';
   });
   gate.querySelector('.no').addEventListener('click', () => {
