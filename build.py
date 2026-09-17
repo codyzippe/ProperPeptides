@@ -230,10 +230,12 @@ pep_extra = '''  <script>
     grid.innerHTML = PRODUCTS.map(p => `
       <article class="pcard ${p.color}" id="${p.id}">
         <div class="art">
-          <img class="box" src="${p.image}" alt="${p.name} ${p.subtitle}">
-          <button type="button" class="coa-mini" data-coa="${p.id}" aria-label="View ${p.name} Certificate of Analysis, lot ${p.lot}">
-            <img src="${p.coaThumb}" alt="" loading="lazy"><span class="lbl">COA</span><span class="lot">Lot ${p.lot}</span>
+          <button type="button" class="flip" data-coa="${p.id}" aria-label="View ${p.name} Certificate of Analysis, lot ${p.lot}">
+            <img class="box" src="${p.image}" alt="${p.name} ${p.subtitle}">
+            <img class="coa-img" src="${p.coaThumb}" alt="" aria-hidden="true">
           </button>
+          <span class="coa-pill" aria-hidden="true">COA &bull; Lot ${p.lot}</span>
+          <button type="button" class="coa-touch" data-coa="${p.id}">View COA</button>
         </div>
         <div class="body">
           <span class="tag">${p.count} &bull; Net Wt ${p.weight} &bull; SKU ${p.sku}</span>
@@ -261,7 +263,9 @@ pep_extra = '''  <script>
     });
     if (location.hash) { const t = document.querySelector(location.hash); if (t) setTimeout(() => t.scrollIntoView({ behavior: 'smooth', block: 'center' }), 200); }
   </script>'''
-page('peptides.html', 'Research Peptides | Proper Peptides', 'GLOW, Wolverine, NAD+, and CJC-1295/Ipamorelin research grade peptide reference materials. 98%+ HPLC verified purity, manufacturer COA on every lot. $120 per box. Sold for laboratory research use only.', pep, 'pep', pep_extra)
+# COA thumbnails are swapped in on hover, so fetch them up front to avoid a flash on first hover
+pep_head = ''.join('  <link rel="preload" as="image" href="assets/coa/%s-coa-thumb.jpg">\n' % i for i in ['glow', 'wolverine', 'nad', 'cjc-1295-ipamorelin'])
+page('peptides.html', 'Research Peptides | Proper Peptides', 'GLOW, Wolverine, NAD+, and CJC-1295/Ipamorelin research grade peptide reference materials. 98%+ HPLC verified purity, manufacturer COA on every lot. $120 per box. Sold for laboratory research use only.', pep, 'pep', pep_extra, head_extra=pep_head)
 
 # ---------------- COA / LAB RESULTS ----------------
 coa = '''

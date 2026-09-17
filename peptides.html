@@ -6,6 +6,10 @@
   <title>Research Peptides | Proper Peptides</title>
   <meta name="description" content="GLOW, Wolverine, NAD+, and CJC-1295/Ipamorelin research grade peptide reference materials. 98%+ HPLC verified purity, manufacturer COA on every lot. $120 per box. Sold for laboratory research use only.">
   <link rel="canonical" href="https://theproperpeptide.com/peptides">
+  <link rel="preload" as="image" href="assets/coa/glow-coa-thumb.jpg">
+  <link rel="preload" as="image" href="assets/coa/wolverine-coa-thumb.jpg">
+  <link rel="preload" as="image" href="assets/coa/nad-coa-thumb.jpg">
+  <link rel="preload" as="image" href="assets/coa/cjc-1295-ipamorelin-coa-thumb.jpg">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
@@ -124,10 +128,12 @@
     grid.innerHTML = PRODUCTS.map(p => `
       <article class="pcard ${p.color}" id="${p.id}">
         <div class="art">
-          <img class="box" src="${p.image}" alt="${p.name} ${p.subtitle}">
-          <button type="button" class="coa-mini" data-coa="${p.id}" aria-label="View ${p.name} Certificate of Analysis, lot ${p.lot}">
-            <img src="${p.coaThumb}" alt="" loading="lazy"><span class="lbl">COA</span><span class="lot">Lot ${p.lot}</span>
+          <button type="button" class="flip" data-coa="${p.id}" aria-label="View ${p.name} Certificate of Analysis, lot ${p.lot}">
+            <img class="box" src="${p.image}" alt="${p.name} ${p.subtitle}">
+            <img class="coa-img" src="${p.coaThumb}" alt="" aria-hidden="true">
           </button>
+          <span class="coa-pill" aria-hidden="true">COA &bull; Lot ${p.lot}</span>
+          <button type="button" class="coa-touch" data-coa="${p.id}">View COA</button>
         </div>
         <div class="body">
           <span class="tag">${p.count} &bull; Net Wt ${p.weight} &bull; SKU ${p.sku}</span>
