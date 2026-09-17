@@ -102,9 +102,9 @@ function ownerEmail(o, when) {
 function customerEmail(o, when) {
   const r = summaryRows(o, when);
   const heading = `We received your order ${o.number}`;
-  const intro = `Thanks, ${esc(o.name.split(' ')[0])}. Please send <strong>${esc(money(o.total))}</strong> via <strong>${esc(o.payment)}</strong> and include your order number <strong>${esc(o.number)}</strong> in the payment note. Once we confirm your payment we'll ship with FedEx and email your tracking number.`;
+  const intro = `Thanks, ${esc(o.name.split(' ')[0])}. Please send <strong>${esc(money(o.total))}</strong> via <strong>${esc(o.payment)}</strong> and include your order number <strong>${esc(o.number)}</strong> in the payment note. Once we confirm your payment we'll ship with FedEx and email your tracking number.<br><br>Certificate of Analysis for each product: <a href="https://theproperpeptide.com/coa" style="color:#4a7fd6">theproperpeptide.com/coa</a>`;
   const html = wrap(heading, intro, htmlTable('Order', r.order) + htmlItems(r.items) + htmlTable('Totals', r.totals) + htmlTable('Ship to', r.shipping));
-  return { subject: heading, html, text: textVersion(heading, r) + `\n\nPlease include ${o.number} in your ${o.payment} note.` };
+  return { subject: heading, html, text: textVersion(heading, r) + `\n\nPlease include ${o.number} in your ${o.payment} note.\nCertificate of Analysis for each product: theproperpeptide.com/coa` };
 }
 
 // ---------- Handler ----------

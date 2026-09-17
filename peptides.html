@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Research Peptides | Proper Peptides</title>
-  <meta name="description" content="GLOW, Wolverine, NAD+, and CJC-1295/Ipamorelin research grade peptide reference materials. Lab tested. $120 per box. Sold for laboratory research use only.">
+  <meta name="description" content="GLOW, Wolverine, NAD+, and CJC-1295/Ipamorelin research grade peptide reference materials. 98%+ HPLC verified purity, manufacturer COA on every lot. $120 per box. Sold for laboratory research use only.">
   <link rel="canonical" href="https://theproperpeptide.com/peptides">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
@@ -57,9 +57,9 @@
 
     <section class="page-hero">
       <div class="wrap center">
-        <span class="eyebrow">thePeptide &bull; Lab Tested &bull; Research Use Only</span>
+        <span class="eyebrow">thePeptide &bull; 98%+ HPLC Verified Purity &bull; Research Use Only</span>
         <h1>Our Peptides</h1>
-        <p class="sub">Four research compounds manufactured for thePeptide. Every product is lab tested for identity and purity and shipped with tracking.</p>
+        <p class="sub">Four research compounds manufactured for thePeptide. Every lot is released against a manufacturer Certificate of Analysis and shipped with tracking.</p>
       </div>
     </section>
     <section style="padding-top:20px">
@@ -145,7 +145,7 @@
       <div class="detail" id="detail-${p.id}">
         <button class="btn sm outline close" data-close="${p.id}">Close</button>
         <h3>${p.name} ${p.subtitle}</h3>
-        ${p.sections.map(s => `<h4>${s.h}</h4>${s.p ? `<p>${s.p}</p>` : ''}${s.li.length ? '<ul>' + s.li.map(l => `<li>${l}</li>`).join('') + '</ul>' : ''}`).join('')}
+        ${p.sections.map(s => `<h4>${s.h}</h4>${s.p ? `<p>${s.p}</p>` : ''}${s.li.length ? '<ul>' + s.li.map(l => `<li>${l}</li>`).join('') + '</ul>' : ''}${s.coaButton ? `<p style="margin-top:14px"><button type="button" class="btn sm" data-coa="${p.id}">View COA</button></p>` : ''}`).join('')}
       </div>`).join('');
 
     grid.addEventListener('click', e => {

@@ -59,8 +59,8 @@ HEAD = '''<!DOCTYPE html>
 '''
 TICKER = '''  <div class="ticker" aria-hidden="true">
     <div class="ticker-track">
-      <span>Research Grade Peptides</span><span>Lab Tested</span><span>Fast Shipping</span><span>Research Use Only</span>
-      <span>Research Grade Peptides</span><span>Lab Tested</span><span>Fast Shipping</span><span>Research Use Only</span>
+      <span>Research Grade Peptides</span><span>98%+ HPLC Verified Purity</span><span>COA on Every Lot</span><span>Fast Shipping</span><span>Research Use Only</span>
+      <span>Research Grade Peptides</span><span>98%+ HPLC Verified Purity</span><span>COA on Every Lot</span><span>Fast Shipping</span><span>Research Use Only</span>
     </div>
   </div>
 '''
@@ -149,16 +149,16 @@ home = '''
     <section class="hero">
       <div class="wrap">
         <div>
-          <span class="eyebrow">Lab Tested &bull; Research Use Only</span>
+          <span class="eyebrow">98%+ HPLC Verified Purity &bull; Research Use Only</span>
           <h1>Research Grade Peptides from <span>Proper Peptides</span></h1>
-          <p class="sub">Authorized reseller of thePeptide research compounds. Four lab tested peptide products, sold exclusively for laboratory and in vitro research use. $120 per box. Free FedEx shipping on 6 or more boxes.</p>
+          <p class="sub">Authorized reseller of thePeptide research compounds. Four peptide products, each released against a manufacturer Certificate of Analysis, sold exclusively for laboratory and in vitro research use. $120 per box. Free FedEx shipping on 6 or more boxes.</p>
           <div class="hero-actions">
             <a class="btn" href="peptides.html">Browse Peptides <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
             <a class="btn outline" href="about.html">About thePeptide</a>
           </div>
           <div class="trust">
             <span><i><svg viewBox="0 0 24 24"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.5"/><circle cx="17" cy="18" r="1.5"/></svg></i>Fast Shipping</span>
-            <span><i><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></i>Lab Verified</span>
+            <span><i><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></i>COA on Every Lot</span>
             <span><i><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h4"/></svg></i>Venmo &amp; Cash App</span>
           </div>
         </div>
@@ -169,10 +169,10 @@ home = '''
     <section>
       <div class="wrap center">
         <h2>Why Choose Proper Peptides</h2>
-        <p class="sub">Trusted for quality, purity, and reliability, backed by thePeptide's vetted US based manufacturing</p>
+        <p class="sub">Every lot is documented by a manufacturer Certificate of Analysis from thePeptide's vetted US based manufacturing</p>
         <div class="features">
-          <div class="feature"><div class="ico"><svg viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/></svg></div><h3>Premium Quality</h3><p>Every batch is accompanied by third party testing for identity and purity.</p></div>
-          <div class="feature"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/></svg></div><h3>Lab Certified</h3><p>Each batch verified for purity and composition with detailed documentation</p></div>
+          <div class="feature"><div class="ico"><svg viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/></svg></div><h3>Premium Quality</h3><p>Actives verified by HPLC at not less than 98% purity on the manufacturer Certificate of Analysis.</p></div>
+          <div class="feature"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/></svg></div><h3>Certificate of Analysis on Every Lot</h3><p>Each lot is released against a manufacturer COA covering HPLC purity, USP 233 heavy metals, and USP 2021/2022 microbial testing.</p></div>
           <div class="feature"><div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M3 11h18M8 7V5h8v2"/></svg></div><h3>Secure Packaging</h3><p>Professional grade packaging with proper storage and handling specifications</p></div>
           <div class="feature"><div class="ico"><svg viewBox="0 0 24 24"><path d="M6 3h6v6l-4 9a2 2 0 0 0 2 3h4M18 3v6l4 9"/></svg></div><h3>Research Grade</h3><p>Sold exclusively for laboratory and in vitro research</p></div>
         </div>
@@ -207,16 +207,16 @@ home_extra = '''  <script>
     if (window.innerWidth < 1024) document.querySelector('.cats').style.gridTemplateColumns = 'repeat(2, 1fr)';
     if (window.innerWidth < 640) document.querySelector('.cats').style.gridTemplateColumns = '1fr';
   </script>'''
-page('index.html', 'Proper Peptides | Research Peptides - GLOW, NAD+, CJC-1295 & More', 'Research grade peptide reference materials. GLOW, Wolverine, NAD+, CJC-1295/Ipamorelin. Lab tested. Sold for laboratory research use only.', home, 'home', home_extra, ticker=True, og=True,
+page('index.html', 'Proper Peptides | Research Peptides - GLOW, NAD+, CJC-1295 & More', 'Research grade peptide reference materials. GLOW, Wolverine, NAD+, CJC-1295/Ipamorelin. 98%+ HPLC verified purity, manufacturer COA on every lot. Sold for laboratory research use only.', home, 'home', home_extra, ticker=True, og=True,
      head_extra='  <meta name="google-site-verification" content="3orrgi-qReCQwUGjqSRBCoDyfLiaDjIUaHbaigQT_Gg" />\n')
 
 # ---------------- PEPTIDES ----------------
 pep = '''
     <section class="page-hero">
       <div class="wrap center">
-        <span class="eyebrow">thePeptide &bull; Lab Tested &bull; Research Use Only</span>
+        <span class="eyebrow">thePeptide &bull; 98%+ HPLC Verified Purity &bull; Research Use Only</span>
         <h1>Our Peptides</h1>
-        <p class="sub">Four research compounds manufactured for thePeptide. Every product is lab tested for identity and purity and shipped with tracking.</p>
+        <p class="sub">Four research compounds manufactured for thePeptide. Every lot is released against a manufacturer Certificate of Analysis and shipped with tracking.</p>
       </div>
     </section>
     <section style="padding-top:20px">
@@ -251,7 +251,7 @@ pep_extra = '''  <script>
       <div class="detail" id="detail-${p.id}">
         <button class="btn sm outline close" data-close="${p.id}">Close</button>
         <h3>${p.name} ${p.subtitle}</h3>
-        ${p.sections.map(s => `<h4>${s.h}</h4>${s.p ? `<p>${s.p}</p>` : ''}${s.li.length ? '<ul>' + s.li.map(l => `<li>${l}</li>`).join('') + '</ul>' : ''}`).join('')}
+        ${p.sections.map(s => `<h4>${s.h}</h4>${s.p ? `<p>${s.p}</p>` : ''}${s.li.length ? '<ul>' + s.li.map(l => `<li>${l}</li>`).join('') + '</ul>' : ''}${s.coaButton ? `<p style="margin-top:14px"><button type="button" class="btn sm" data-coa="${p.id}">View COA</button></p>` : ''}`).join('')}
       </div>`).join('');
 
     grid.addEventListener('click', e => {
@@ -261,7 +261,7 @@ pep_extra = '''  <script>
     });
     if (location.hash) { const t = document.querySelector(location.hash); if (t) setTimeout(() => t.scrollIntoView({ behavior: 'smooth', block: 'center' }), 200); }
   </script>'''
-page('peptides.html', 'Research Peptides | Proper Peptides', 'GLOW, Wolverine, NAD+, and CJC-1295/Ipamorelin research grade peptide reference materials. Lab tested. $120 per box. Sold for laboratory research use only.', pep, 'pep', pep_extra)
+page('peptides.html', 'Research Peptides | Proper Peptides', 'GLOW, Wolverine, NAD+, and CJC-1295/Ipamorelin research grade peptide reference materials. 98%+ HPLC verified purity, manufacturer COA on every lot. $120 per box. Sold for laboratory research use only.', pep, 'pep', pep_extra)
 
 # ---------------- COA / LAB RESULTS ----------------
 coa = '''
@@ -274,6 +274,7 @@ coa = '''
     </section>
     <section style="padding-top:20px">
       <div class="wrap">
+        <p class="coa-intro">Each certificate is prepared by thePeptide's Quality Director and approved by the Account Manager for that lot. It covers identity and purity of the actives by HPLC (not less than 98%), heavy metals (arsenic, cadmium, mercury, lead) per USP 233, and microbial testing (total aerobic count, coliforms, E. coli, Salmonella, Staphylococcus, yeast and mold) per USP 2021 and 2022. Lot number, part number, manufacturing date, and best by date are printed on each certificate.</p>
         <div class="coa-grid" id="coaGrid"></div>
       </div>
     </section>
@@ -296,7 +297,7 @@ coa_extra = '''  <script>
         </div>
       </article>`).join('');
   </script>'''
-page('coa.html', 'Certificates of Analysis', 'Certificates of Analysis for every Proper Peptides lot: GLOW, Wolverine, NAD+, and CJC-1295/Ipamorelin. Lab tested. Research use only.', coa, 'coa', coa_extra)
+page('coa.html', 'Certificates of Analysis', 'Certificates of Analysis for every Proper Peptides lot: GLOW, Wolverine, NAD+, and CJC-1295/Ipamorelin: HPLC purity, USP 233 heavy metals, USP 2021/2022 microbials. Research use only.', coa, 'coa', coa_extra)
 
 # ---------------- ABOUT ----------------
 about = '''
@@ -319,13 +320,13 @@ about = '''
           <div>
             <h2>Delivering Clean, Reliable Peptides, Every Time</h2>
             <p style="margin-top:16px">thePeptide's mission is simple: make high quality peptides easy to access, easy to trust, and easy to order. The focus is on what matters most: purity, consistency, and real value.</p>
-            <p>Every product is lab tested for verified quality and shipped discreetly with care. thePeptide partners with vetted, US based facilities that implement the highest standard of care in preparing products. Peptides are carefully synthesized and tested to meet the exacting needs of research laboratories and institutions.</p>
-            <p>thePeptide is not a compounding facility. It is a partner in peptide innovation, offering ready to ship, lab tested peptides with consistent documentation and ease of access.</p>
+            <p>Every lot is released against a manufacturer Certificate of Analysis and shipped discreetly with care. thePeptide partners with vetted, US based facilities that implement the highest standard of care in preparing products. Peptides are carefully synthesized and tested to meet the exacting needs of research laboratories and institutions.</p>
+            <p>thePeptide is not a compounding facility. It is a partner in peptide innovation, offering ready to ship peptides with a Certificate of Analysis on every lot and ease of access.</p>
           </div>
           <div>
             <h2 style="font-size:1.6rem">Why Choose thePeptide?</h2>
             <div class="pillars" style="margin-top:20px">
-              <div class="pillar"><h3>Uncompromising Quality</h3><p>Every product is tested for identity, purity, and consistency.</p></div>
+              <div class="pillar"><h3>Certificate of Analysis on Every Lot</h3><p>Actives verified by HPLC at not less than 98% purity, with heavy metals per USP 233 and microbials per USP 2021/2022.</p></div>
               <div class="pillar"><h3>Vetted Ingredients</h3><p>Sourced exclusively from vetted, US based facilities that implement the highest standard of care.</p></div>
               <div class="pillar"><h3>No Outsourcing of Standards</h3><p>Quality benchmarks guide every step of the process.</p></div>
               <div class="pillar"><h3>Professionally Packed, Shipped with Tracking</h3><p>Fast fulfillment with tracking on every order.</p></div>
@@ -338,11 +339,11 @@ about = '''
     <section style="background:var(--navy-900)">
       <div class="wrap center">
         <h2>Our Commitment to Quality</h2>
-        <p class="sub">thePeptide goes beyond industry standards to supply peptides of verified identity and purity</p>
+        <p class="sub">Every lot ships with a manufacturer Certificate of Analysis documenting identity, purity, heavy metals, and microbial results</p>
         <div class="features">
           <div class="feature"><div class="ico"><svg viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/></svg></div><h3>Meticulously Vetted Raw Materials</h3><p>Sourced exclusively from vetted, US based facilities</p></div>
-          <div class="feature"><div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>Rigorous Quality Control</h3><p>Every batch lab tested for identity and purity before it ships</p></div>
-          <div class="feature"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div><h3>Decades of Peptide Innovation</h3><p>Built on long standing peptide research and manufacturing experience</p></div>
+          <div class="feature"><div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>Released Per Lot</h3><p>Each COA is prepared by the Quality Director and approved by the Account Manager</p></div>
+          <div class="feature"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div><h3>Documented Storage</h3><p>Store in a cool dry place, away from moisture, direct sunlight, and excessive heat</p></div>
           <div class="feature"><div class="ico"><svg viewBox="0 0 24 24"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.5"/><circle cx="17" cy="18" r="1.5"/></svg></div><h3>Reliable Shipping and Tracking</h3><p>On all orders, professionally packed</p></div>
         </div>
       </div>
@@ -373,13 +374,13 @@ about = '''
     <section style="padding-top:0">
       <div class="wrap center">
         <h2>Proper Peptides &times; thePeptide</h2>
-        <p class="sub">Proper Peptides sells thePeptide's four research blends directly. Same lab tested products, same manufacturer, ordered through theproperpeptide.com.</p>
+        <p class="sub">Proper Peptides sells thePeptide's four research blends directly. Same products, same manufacturer, same Certificates of Analysis, ordered through theproperpeptide.com.</p>
         <div style="margin-top:28px"><a class="btn" href="peptides.html">Shop the Peptides</a></div>
       </div>
     </section>
 '''
 about_extra = '''  <script>document.getElementById('aboutTiles').innerHTML = PRODUCTS.map(tileHTML).join('');</script>'''
-page('about.html', 'About Us', 'About thePeptide, the US based manufacturer of the research grade peptide reference materials sold by Proper Peptides. Lab tested. Research use only.', about, 'about', about_extra)
+page('about.html', 'About Us', 'About thePeptide, the US based manufacturer of the research grade peptide reference materials sold by Proper Peptides. Manufacturer COA on every lot. Research use only.', about, 'about', about_extra)
 
 # ---------------- CONTACT ----------------
 contact = '''
