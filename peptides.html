@@ -37,6 +37,7 @@
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="peptides.html" aria-current="page">Peptides</a></li>
+          <li><a href="coa.html">Lab Results</a></li>
           <li><a href="about.html">About Us</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
@@ -94,6 +95,7 @@
         <div>
           <h4>Company</h4>
           <ul>
+            <li><a href="coa.html">Lab Results</a></li>
             <li><a href="about.html">About Us</a></li>
             <li><a href="contact.html">Contact</a></li>
             <li><a href="cart.html">Cart</a></li>
@@ -121,12 +123,18 @@
     const grid = document.getElementById('productGrid');
     grid.innerHTML = PRODUCTS.map(p => `
       <article class="pcard ${p.color}" id="${p.id}">
-        <div class="art"><img src="${p.image}" alt="${p.name} ${p.subtitle}"></div>
+        <div class="art">
+          <img class="box" src="${p.image}" alt="${p.name} ${p.subtitle}">
+          <button type="button" class="coa-mini" data-coa="${p.id}" aria-label="View ${p.name} Certificate of Analysis, lot ${p.lot}">
+            <img src="${p.coaThumb}" alt="" loading="lazy"><span class="lbl">COA</span><span class="lot">Lot ${p.lot}</span>
+          </button>
+        </div>
         <div class="body">
           <span class="tag">${p.count} &bull; Net Wt ${p.weight} &bull; SKU ${p.sku}</span>
           <h3>${p.name}<small>${p.subtitle}</small></h3>
           <p class="desc">${p.short}</p>
           <ul class="specs">${p.perStrip.map(s => `<li>${s}</li>`).join('')}</ul>
+          <a class="coa-link" href="${p.coa}" data-coa="${p.id}">View COA &bull; Lot ${p.lot}</a>
           <div class="buy">
             <div class="price">${p.price ? money(p.price) : 'Contact for price'}<small>${p.price ? 'USD' : ''}</small></div>
             <button class="btn sm" data-add="${p.id}">Add to Cart</button>

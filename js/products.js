@@ -15,11 +15,14 @@ const PRODUCTS = [
     perStrip: ["BPC-157 300 mcg", "TB-500 250 mcg", "GHK-Cu 2 mg"],
     color: "cyan",
     image: "https://thepeptide.s3.us-east-1.amazonaws.com/CJC-Front-NoShadow-01K18XRHEPZPDRJ9VEFXTVSBAV.png",
+    coa: "assets/coa/glow-coa.jpg",
+    coaThumb: "assets/coa/glow-coa-thumb.jpg",
+    lot: "L1190", part: "ST00242", mfg: "09/2025", bestBy: "09/2027",
     short: "A research blend containing GHK-Cu, BPC-157, and TB-500. Supplied as 30 count strips, net wt 3.75 g. Sold for laboratory research use only.",
     sections: [
       { h: "Composition", p: "Per strip:", li: ["BPC-157 300 mcg", "TB-500 250 mcg", "GHK-Cu 2 mg"] },
       { h: "Specifications", p: "", li: ["Form: strip", "Count: 30", "Net weight: 3.75 g", "Storage: store sealed in a cool, dry place away from light"] },
-      { h: "Documentation", p: "Certificate of Analysis available on request.", li: [] }
+      { h: "Documentation", p: "Certificate of Analysis: <a href=\"assets/coa/glow-coa.jpg\" data-coa=\"glow\">view lot L1190</a>.", li: [] }
     ]
   },
   {
@@ -33,11 +36,14 @@ const PRODUCTS = [
     perStrip: ["BPC-157 500 mcg", "TB-500 500 mcg"],
     color: "peach",
     image: "https://thepeptide.s3.us-east-1.amazonaws.com/Wolverine-Front-NoShadow-01K18YVGAX29D769SHG2RKYG3Q.png",
+    coa: "assets/coa/wolverine-coa.jpg",
+    coaThumb: "assets/coa/wolverine-coa-thumb.jpg",
+    lot: "L1192", part: "ST00240", mfg: "09/2025", bestBy: "09/2027",
     short: "A research blend containing BPC-157 and TB-500. Supplied as 30 count strips, net wt 3.75 g. Sold for laboratory research use only.",
     sections: [
       { h: "Composition", p: "Per strip:", li: ["BPC-157 500 mcg", "TB-500 500 mcg"] },
       { h: "Specifications", p: "", li: ["Form: strip", "Count: 30", "Net weight: 3.75 g", "Storage: store sealed in a cool, dry place away from light"] },
-      { h: "Documentation", p: "Certificate of Analysis available on request.", li: [] }
+      { h: "Documentation", p: "Certificate of Analysis: <a href=\"assets/coa/wolverine-coa.jpg\" data-coa=\"wolverine\">view lot L1192</a>.", li: [] }
     ]
   },
   {
@@ -51,11 +57,14 @@ const PRODUCTS = [
     perStrip: ["NAD+ 100 mg"],
     color: "lime",
     image: "https://thepeptide.s3.us-east-1.amazonaws.com/NAD-Front-NoShadow-01K18YXJT1HGR2CKQHD9MV0JT7.png",
+    coa: "assets/coa/nad-coa.jpg",
+    coaThumb: "assets/coa/nad-coa-thumb.jpg",
+    lot: "L1193", part: "ST00243", mfg: "09/2025", bestBy: "09/2027",
     short: "Nicotinamide adenine dinucleotide (NAD+), a naturally occurring coenzyme, supplied as 30 count strips, net wt 8.55 g. Sold for laboratory research use only.",
     sections: [
       { h: "Composition", p: "Per strip:", li: ["NAD+ 100 mg"] },
       { h: "Specifications", p: "", li: ["Form: strip", "Count: 30", "Net weight: 8.55 g", "Storage: store sealed in a cool, dry place away from light"] },
-      { h: "Documentation", p: "Certificate of Analysis available on request.", li: [] }
+      { h: "Documentation", p: "Certificate of Analysis: <a href=\"assets/coa/nad-coa.jpg\" data-coa=\"nad\">view lot L1193</a>.", li: [] }
     ]
   },
   {
@@ -69,11 +78,14 @@ const PRODUCTS = [
     perStrip: ["CJC-1295 250 mcg", "Ipamorelin 250 mcg"],
     color: "lemon",
     image: "https://thepeptide.s3.us-east-1.amazonaws.com/Glow-Front-NoShadow 1 (1)-01K18YQWGPQRKRYGZXY7K4QFFC.png",
+    coa: "assets/coa/cjc-1295-ipamorelin-coa.jpg",
+    coaThumb: "assets/coa/cjc-1295-ipamorelin-coa-thumb.jpg",
+    lot: "L1191", part: "ST00241", mfg: "09/2025", bestBy: "09/2027",
     short: "A research blend containing CJC-1295 and Ipamorelin. Supplied as 20 count strips, net wt 2.6 g. Sold for laboratory research use only.",
     sections: [
       { h: "Composition", p: "Per strip:", li: ["CJC-1295 250 mcg", "Ipamorelin 250 mcg"] },
       { h: "Specifications", p: "", li: ["Form: strip", "Count: 20", "Net weight: 2.6 g", "Storage: store sealed in a cool, dry place away from light"] },
-      { h: "Documentation", p: "Certificate of Analysis available on request.", li: [] }
+      { h: "Documentation", p: "Certificate of Analysis: <a href=\"assets/coa/cjc-1295-ipamorelin-coa.jpg\" data-coa=\"cjc-1295-ipamorelin\">view lot L1191</a>.", li: [] }
     ]
   }
 ];

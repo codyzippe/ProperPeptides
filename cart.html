@@ -37,6 +37,7 @@
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="peptides.html">Peptides</a></li>
+          <li><a href="coa.html">Lab Results</a></li>
           <li><a href="about.html">About Us</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
@@ -154,6 +155,7 @@
         <div>
           <h4>Company</h4>
           <ul>
+            <li><a href="coa.html">Lab Results</a></li>
             <li><a href="about.html">About Us</a></li>
             <li><a href="contact.html">Contact</a></li>
             <li><a href="cart.html">Cart</a></li>
@@ -295,6 +297,7 @@
             <div class="meta">${i.count} &bull; ${money(i.price)} per box</div>
             <div class="qty"><button type="button" data-q="${i.id}" data-d="-1" aria-label="Decrease quantity">&minus;</button><span>${i.qty}</span><button type="button" data-q="${i.id}" data-d="1" aria-label="Increase quantity">+</button></div>
             <button type="button" class="remove" data-rm="${i.id}">Remove</button>
+            <a class="coa-link-sm" href="${i.coa}" data-coa="${i.id}">COA</a>
           </div>
           <div class="price">${money(i.price * i.qty)}</div>
         </div>`).join('');

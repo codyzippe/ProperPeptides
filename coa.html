@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Contact | Proper Peptides</title>
-  <meta name="description" content="Contact Proper Peptides by email for product questions, order status, and wholesale inquiries. Research use only.">
-  <link rel="canonical" href="https://theproperpeptide.com/contact">
+  <title>Certificates of Analysis | Proper Peptides</title>
+  <meta name="description" content="Certificates of Analysis for every Proper Peptides lot: GLOW, Wolverine, NAD+, and CJC-1295/Ipamorelin. Lab tested. Research use only.">
+  <link rel="canonical" href="https://theproperpeptide.com/coa">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
@@ -37,9 +37,9 @@
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="peptides.html">Peptides</a></li>
-          <li><a href="coa.html">Lab Results</a></li>
+          <li><a href="coa.html" aria-current="page">Lab Results</a></li>
           <li><a href="about.html">About Us</a></li>
-          <li><a href="contact.html" aria-current="page">Contact</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
       <div class="tools">
@@ -57,37 +57,14 @@
 
     <section class="page-hero">
       <div class="wrap center">
-        <h1>Contact Us</h1>
-        <p class="sub">Questions about a product, an order, or research documentation? Reach out and we'll get back to you.</p>
+        <span class="eyebrow">Lab Tested &bull; Research Use Only</span>
+        <h1>Certificates of Analysis</h1>
+        <p class="sub">Every lot ships with a Certificate of Analysis. Click any certificate to view it full size.</p>
       </div>
     </section>
-    <section style="padding-top:10px">
+    <section style="padding-top:20px">
       <div class="wrap">
-        <div class="contact-grid">
-          <div class="contact-card">
-            <h3>Get In Touch</h3>
-            <p style="margin-top:12px"><strong>Email</strong><br><a href="mailto:properpeptide@gmail.com">properpeptide@gmail.com</a><br><a href="mailto:codyzippe1@gmail.com">codyzippe1@gmail.com</a></p>
-            <p><strong>Hours</strong><br>Monday to Friday<br>9:00 a.m. to 6:00 p.m. (PST)</p>
-            <p><strong>Manufacturer support</strong><br>thePeptide technical support<br><a href="mailto:support@thepeptide.com">support@thepeptide.com</a></p>
-            <p style="font-size:.85rem">Research use only. We cannot answer questions about human use.</p>
-          </div>
-          <div class="contact-card">
-            <form id="contactForm">
-              <div class="row2">
-                <div class="field"><label for="name">Name</label><input id="name" name="name" required></div>
-                <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required></div>
-              </div>
-              <div class="field"><label for="subject">Subject</label>
-                <select id="subject" name="subject">
-                  <option>Product question</option><option>Order status</option><option>Wholesale / bulk</option><option>Other</option>
-                </select>
-              </div>
-              <div class="field"><label for="message">Message</label><textarea id="message" name="message" required></textarea></div>
-              <button class="btn" type="submit">Send Message</button>
-              <p style="font-size:.8rem;color:var(--text-dim);margin-top:12px">This opens your email app with the message ready to send.</p>
-            </form>
-          </div>
-        </div>
+        <div class="coa-grid" id="coaGrid"></div>
       </div>
     </section>
   </main>
@@ -143,13 +120,22 @@
   <script src="js/products.js"></script>
   <script src="js/main.js"></script>
   <script>
-    // No backend: the form opens the visitor's email app with everything pre filled.
-    document.getElementById('contactForm').addEventListener('submit', e => {
-      e.preventDefault();
-      const f = e.target.elements;   // form.name would be the form's own name attribute, so go through elements
-      const body = 'From: ' + f.name.value.trim() + ' (' + f.email.value.trim() + ')\n\n' + f.message.value.trim();
-      window.location.href = 'mailto:properpeptide@gmail.com?subject=' + encodeURIComponent(f.subject.value) + '&body=' + encodeURIComponent(body);
-    });
+    document.getElementById('coaGrid').innerHTML = PRODUCTS.map(p => `
+      <article class="coa-card" id="coa-${p.id}">
+        <button type="button" class="coa-thumb" data-coa="${p.id}" aria-label="View ${p.name} Certificate of Analysis, lot ${p.lot}">
+          <img src="${p.coaThumb}" alt="${p.name} Certificate of Analysis, lot ${p.lot}" loading="lazy">
+        </button>
+        <div class="coa-body">
+          <h3>${p.name}<small>${p.subtitle}</small></h3>
+          <dl>
+            <div><dt>Lot</dt><dd>${p.lot}</dd></div>
+            <div><dt>Part</dt><dd>${p.part}</dd></div>
+            <div><dt>Manufactured</dt><dd>${p.mfg}</dd></div>
+            <div><dt>Best by</dt><dd>${p.bestBy}</dd></div>
+          </dl>
+          <a class="details-link" href="${p.coa}" data-coa="${p.id}">View full size &rarr;</a>
+        </div>
+      </article>`).join('');
   </script>
 </body>
 </html>

@@ -174,6 +174,57 @@ document.addEventListener('click', e => {
 
 document.addEventListener('DOMContentLoaded', () => { Cart.badge(); Cart.tick(); });
 
+// ---------- Lightbox (Certificate of Analysis viewer) ----------
+// Any element with data-coa="productId" opens that product's certificate.
+const Lightbox = {
+  el: null, last: null,
+  build() {
+    if (this.el) return this.el;
+    const el = document.createElement('div');
+    el.className = 'lightbox'; el.hidden = true; el.tabIndex = -1;
+    el.setAttribute('role', 'dialog'); el.setAttribute('aria-modal', 'true'); el.setAttribute('aria-label', 'Certificate of Analysis');
+    el.innerHTML = '<div class="lb-inner">' +
+      '<button type="button" class="lb-close" aria-label="Close certificate viewer">&times;</button>' +
+      '<img class="lb-img" alt="">' +
+      '<div class="lb-bar"><span class="lb-caption"></span><a class="lb-download" download>Download</a></div>' +
+      '</div>';
+    document.body.appendChild(el);
+    el.addEventListener('click', e => { if (e.target === el || e.target.closest('.lb-close')) this.close(); });
+    el.addEventListener('keydown', e => {
+      if (e.key === 'Escape') { e.preventDefault(); this.close(); return; }
+      if (e.key !== 'Tab') return;
+      // keep focus inside the dialog
+      const f = el.querySelectorAll('button, a[href]'); const first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
+    this.el = el; return el;
+  },
+  open({ src, alt, caption, download }) {
+    const el = this.build(); this.last = document.activeElement;
+    const img = el.querySelector('.lb-img'); img.src = src; img.alt = alt || caption || '';
+    el.querySelector('.lb-caption').textContent = caption || '';
+    const dl = el.querySelector('.lb-download'); const file = download || src;
+    dl.href = file; dl.setAttribute('download', file.split('/').pop());
+    el.hidden = false; document.body.style.overflow = 'hidden';
+    el.querySelector('.lb-close').focus();
+  },
+  close() {
+    if (!this.el || this.el.hidden) return;
+    this.el.hidden = true; document.body.style.overflow = '';
+    if (this.last && this.last.focus) this.last.focus();
+  },
+  isOpen() { return !!this.el && !this.el.hidden; }
+};
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-coa]');
+  if (!b) return;
+  const p = PRODUCTS.find(x => x.id === b.dataset.coa);
+  if (!p || !p.coa) return;
+  e.preventDefault();
+  Lightbox.open({ src: p.coa, alt: p.name + ' Certificate of Analysis, lot ' + p.lot, caption: p.name + ' ' + p.subtitle + ' \u00b7 Lot ' + p.lot, download: p.coa });
+});
+
 // ---------- Helpers used by pages ----------
 function tileHTML(p) {
   return `<a class="tile ${p.color}" href="peptides.html#${p.id}">

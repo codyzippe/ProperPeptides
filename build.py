@@ -39,6 +39,7 @@ HEAD = '''<!DOCTYPE html>
         <ul>
           <li><a href="index.html"{c_home}>Home</a></li>
           <li><a href="peptides.html"{c_pep}>Peptides</a></li>
+          <li><a href="coa.html"{c_coa}>Lab Results</a></li>
           <li><a href="about.html"{c_about}>About Us</a></li>
           <li><a href="contact.html"{c_contact}>Contact</a></li>
         </ul>
@@ -91,6 +92,7 @@ FOOT = '''  </main>
         <div>
           <h4>Company</h4>
           <ul>
+            <li><a href="coa.html">Lab Results</a></li>
             <li><a href="about.html">About Us</a></li>
             <li><a href="contact.html">Contact</a></li>
             <li><a href="cart.html">Cart</a></li>
@@ -135,11 +137,11 @@ def page_url(name):
     return SITE + '/' + ('' if name == 'index.html' else name[:-5])
 
 def page(name, title, desc, body, current, extra='', ticker=False, og=False, head_extra=''):
-    cur = {k: (' aria-current="page"' if k == current else '') for k in ['home','pep','about','contact']}
+    cur = {k: (' aria-current="page"' if k == current else '') for k in ['home','pep','coa','about','contact']}
     url = page_url(name)
     full_title = title if 'Proper Peptides' in title else title + ' | Proper Peptides'
     og_tags = OG.format(full_title=full_title, desc=desc, image=OG_IMAGE.replace(' ', '%20'), url=url) if og else ''
-    html = HEAD.format(full_title=full_title, desc=desc, url=url, og=og_tags, head_extra=head_extra, ticker=(TICKER if ticker else ''), c_home=cur['home'], c_pep=cur['pep'], c_about=cur['about'], c_contact=cur['contact']) + body + FOOT.format(extra=extra)
+    html = HEAD.format(full_title=full_title, desc=desc, url=url, og=og_tags, head_extra=head_extra, ticker=(TICKER if ticker else ''), c_home=cur['home'], c_pep=cur['pep'], c_coa=cur['coa'], c_about=cur['about'], c_contact=cur['contact']) + body + FOOT.format(extra=extra)
     open(name, 'w').write(html)
 
 # ---------------- HOME ----------------
@@ -227,12 +229,18 @@ pep_extra = '''  <script>
     const grid = document.getElementById('productGrid');
     grid.innerHTML = PRODUCTS.map(p => `
       <article class="pcard ${p.color}" id="${p.id}">
-        <div class="art"><img src="${p.image}" alt="${p.name} ${p.subtitle}"></div>
+        <div class="art">
+          <img class="box" src="${p.image}" alt="${p.name} ${p.subtitle}">
+          <button type="button" class="coa-mini" data-coa="${p.id}" aria-label="View ${p.name} Certificate of Analysis, lot ${p.lot}">
+            <img src="${p.coaThumb}" alt="" loading="lazy"><span class="lbl">COA</span><span class="lot">Lot ${p.lot}</span>
+          </button>
+        </div>
         <div class="body">
           <span class="tag">${p.count} &bull; Net Wt ${p.weight} &bull; SKU ${p.sku}</span>
           <h3>${p.name}<small>${p.subtitle}</small></h3>
           <p class="desc">${p.short}</p>
           <ul class="specs">${p.perStrip.map(s => `<li>${s}</li>`).join('')}</ul>
+          <a class="coa-link" href="${p.coa}" data-coa="${p.id}">View COA &bull; Lot ${p.lot}</a>
           <div class="buy">
             <div class="price">${p.price ? money(p.price) : 'Contact for price'}<small>${p.price ? 'USD' : ''}</small></div>
             <button class="btn sm" data-add="${p.id}">Add to Cart</button>
@@ -254,6 +262,41 @@ pep_extra = '''  <script>
     if (location.hash) { const t = document.querySelector(location.hash); if (t) setTimeout(() => t.scrollIntoView({ behavior: 'smooth', block: 'center' }), 200); }
   </script>'''
 page('peptides.html', 'Research Peptides | Proper Peptides', 'GLOW, Wolverine, NAD+, and CJC-1295/Ipamorelin research grade peptide reference materials. Lab tested. $120 per box. Sold for laboratory research use only.', pep, 'pep', pep_extra)
+
+# ---------------- COA / LAB RESULTS ----------------
+coa = '''
+    <section class="page-hero">
+      <div class="wrap center">
+        <span class="eyebrow">Lab Tested &bull; Research Use Only</span>
+        <h1>Certificates of Analysis</h1>
+        <p class="sub">Every lot ships with a Certificate of Analysis. Click any certificate to view it full size.</p>
+      </div>
+    </section>
+    <section style="padding-top:20px">
+      <div class="wrap">
+        <div class="coa-grid" id="coaGrid"></div>
+      </div>
+    </section>
+'''
+coa_extra = '''  <script>
+    document.getElementById('coaGrid').innerHTML = PRODUCTS.map(p => `
+      <article class="coa-card" id="coa-${p.id}">
+        <button type="button" class="coa-thumb" data-coa="${p.id}" aria-label="View ${p.name} Certificate of Analysis, lot ${p.lot}">
+          <img src="${p.coaThumb}" alt="${p.name} Certificate of Analysis, lot ${p.lot}" loading="lazy">
+        </button>
+        <div class="coa-body">
+          <h3>${p.name}<small>${p.subtitle}</small></h3>
+          <dl>
+            <div><dt>Lot</dt><dd>${p.lot}</dd></div>
+            <div><dt>Part</dt><dd>${p.part}</dd></div>
+            <div><dt>Manufactured</dt><dd>${p.mfg}</dd></div>
+            <div><dt>Best by</dt><dd>${p.bestBy}</dd></div>
+          </dl>
+          <a class="details-link" href="${p.coa}" data-coa="${p.id}">View full size &rarr;</a>
+        </div>
+      </article>`).join('');
+  </script>'''
+page('coa.html', 'Certificates of Analysis', 'Certificates of Analysis for every Proper Peptides lot: GLOW, Wolverine, NAD+, and CJC-1295/Ipamorelin. Lab tested. Research use only.', coa, 'coa', coa_extra)
 
 # ---------------- ABOUT ----------------
 about = '''
@@ -580,6 +623,7 @@ cart_extra = r'''  <script>
             <div class="meta">${i.count} &bull; ${money(i.price)} per box</div>
             <div class="qty"><button type="button" data-q="${i.id}" data-d="-1" aria-label="Decrease quantity">&minus;</button><span>${i.qty}</span><button type="button" data-q="${i.id}" data-d="1" aria-label="Increase quantity">+</button></div>
             <button type="button" class="remove" data-rm="${i.id}">Remove</button>
+            <a class="coa-link-sm" href="${i.coa}" data-coa="${i.id}">COA</a>
           </div>
           <div class="price">${money(i.price * i.qty)}</div>
         </div>`).join('');
@@ -678,7 +722,7 @@ cart_extra = r'''  <script>
   </script>'''
 page('cart.html', 'Cart', 'Your Proper Peptides cart and checkout. Pay with Venmo or Cash App, free FedEx shipping on 6 or more boxes.', cart, '', cart_extra)
 # ---------------- SEO files ----------------
-PAGES = ['index.html', 'peptides.html', 'about.html', 'contact.html', 'cart.html']
+PAGES = ['index.html', 'peptides.html', 'coa.html', 'about.html', 'contact.html', 'cart.html']
 open('robots.txt', 'w').write('User-agent: *\nAllow: /\n\nSitemap: ' + SITE + '/sitemap.xml\n')
 open('sitemap.xml', 'w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     + ''.join('  <url><loc>' + page_url(n) + '</loc></url>\n' for n in PAGES) + '</urlset>\n')
