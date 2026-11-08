@@ -4,6 +4,7 @@
   "private": true,
   "description": "Proper Peptides static site (Venmo / Cash App checkout, order emails via Resend) on Vercel",
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "resend": "^4.0.0"
   }
 }
